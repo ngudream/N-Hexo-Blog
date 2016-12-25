@@ -1,0 +1,144 @@
+@import "nib"
+@import "_variables"
+@import "_util/mixin"
+@import "_util/grid"
+
+global-reset()
+
+ol{
+  list-style: decimal;
+  padding-left: 20px;
+}
+ul{
+  list-style: none;
+}
+input, button
+  margin: 0
+  padding: 0
+  &::-moz-focus-inner
+    border: 0
+    padding: 0
+
+html
+  font-size base-font-size
+
+body
+  /* font-family: font-sans, font-chs, sans-serif; */
+  font-family:"Microsoft Yahei","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+  background: #fff;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-font-feature-settings: "liga" on;
+  color: #333
+  -webkit-overflow-scrolling: touch
+
+::selection 
+  background: rgba(147, 181, 224, .6);
+  color: white;
+
+h2,h3,h4,h5,h6 {
+  font-family: "Microsoft YaHei",Arial,Helvetica,font-serif, serif;
+}
+
+h1:hover,h2:hover{
+	color #66BE66
+}
+
+h3:hover,h4:hover,h5:hover,h6:hover{
+	color #88acdb
+}
+
+h1,h2,h3{
+  display: block;
+}
+h1 {
+  font-size: 1.5rem;
+  font-family: "Segoe UI", font-sans, font-chs, sans-serif;
+}
+h2 {
+  font-size: 1.5rem;
+  font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+}
+h3 {
+  font-size:1.3rem;
+  font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+}
+h4 {
+  font-size:1.15rem;
+  font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+}
+h5,h6{
+  font-size:1rem;
+  font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+}
+
+a {
+  text-decoration:none;
+  outline-width:0;
+  color:#258fb8;
+  outline: none;
+}
+
+.alignleft {
+  float:left
+}
+.alignright {
+  float:right
+}
+.clearfix {
+  *zoom:1
+}
+.clearfix:after {
+  content:"";
+  display:table;
+  clear:both
+}
+.inner {
+  width:1000px;
+  margin:0 auto
+}
+.hide{
+  display: none;
+}
+@media screen and (max-width:1040px) {
+  .inner {
+    width:100%
+  }
+}
+
+@import "_extend"
+@import "_partial/main"
+@import "_partial/archive"
+@import "_partial/article"
+@import "_partial/archive"
+/* @import "_partial/highlight" */
+@import "_partial/footer"
+
+if share
+  @import "_partial/share"
+
+@import "_partial/page"
+@import "_partial/instagram"
+@import "_partial/tagcloud"
+@import "_partial/scroll"
+@import "_partial/mobile-slider"
+
+if search
+  @import "_partial/search"
+
+@import "_partial/customise/color-scheme"
+
+if sidebar
+  @import "_partial/sidebar"
+  
+/*解决prettyify在yilia主题下面行号显示问题*/
+pre.prettyprint{
+ padding-left: 20px;
+}
+
+if highlight{
+  @import "_partial/highlight"
+}
+#instantclick {
+    display: none;
+}

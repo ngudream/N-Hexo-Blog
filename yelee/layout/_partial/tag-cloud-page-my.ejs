@@ -1,0 +1,103 @@
+<hr>
+<br>
+<%- list_categories() %>
+<script src="/js/tagcanvas.js" type="text/javascript"></script>
+<div class="tags" id="myTags">
+ <canvas width="350" height="350" id="my3DTags">
+    <p>Anything in here will be replaced on browsers that support the canvas element</p>
+</canvas>
+</div>
+<div class="tags" id="tags">
+ <ul>
+  <%- tagcloud({
+      min_font: 16,
+      max_font: 35,
+      amount: 999,
+      color: true,
+      start_color: 'blue',
+      end_color: 'green',
+  }) %>
+ </ul>
+</div>
+<style type="text/css">
+    .category-list li, .tags li{
+        display: inline;
+        font-size: 1.2em;
+        margin-right: 1em;
+        line-height: 60px;
+        border: 1px solid lightgray;
+        padding: 6px;
+    }
+    .category-list a {
+        color: gray;
+    }
+    .category-list:hover a {
+        color: gray;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .category-list-count {
+        margin-left: 2px;
+        font-size: .9em;
+    }
+    .article-entry ul li:before{
+        display: none;
+    }
+    .article-inner  {
+        text-align: center;
+    }
+    .article-meta {
+        display: none;
+    }
+    .article-header {
+        padding-right: 35px;
+    }
+    #container .article .article-title {
+        padding-right: 0;
+    }
+    .tags {
+        max-width: 40em;
+        margin: 2em auto;
+        margin-top: 0em;
+    }
+    .tags a {
+        margin-right: 1em;
+        line-height: 65px;
+        border-bottom: 1px solid gray;
+    }
+    .tags a:hover {
+        font-weight: bold;
+        text-decoration: none;
+    }
+    .category-list-child {
+        display: none;
+    }
+</style>
+    <script type="text/javascript">
+      window.onload = function() {
+        try {
+          TagCanvas.Start('my3DTags','tags',{
+            textFont: 'Georgia,Optima',
+            textColour: null,
+            outlineColour: '#000000',
+			outlineRadius: 4,
+            weight: true,
+            reverse: true,
+            depth: 0.8,
+            maxSpeed: 0.04,
+            bgRadius: 1,
+            freezeDecel: true,
+			outlineThickness: 0.5,
+			pinchZoom: true,
+			pulsateTo: 0.2,
+			outlineDashSpeed: 0,
+			outlineMethod: 'size',
+			outlineIncrease: 4,
+			hideTags: true
+          });
+        } catch(e) {
+          // something went wrong, hide the canvas container
+          document.getElementById('myTags').style.display = 'none';
+        }
+      };
+    </script>

@@ -1,0 +1,355 @@
+span.ua {
+    display: inline-block !important;
+    margin: auto 1px .3em !important;
+    color: #fff !important;
+}
+.os_other {
+    background-color: #bdb2a7!important;
+    color: #fff;
+    border: 1px solid #BBB!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.ua_other {
+    background-color: #bdb2a7!important;
+    color: #fff;
+    border: 1px solid #BBB!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.ua_other {
+    opacity: 1;
+}
+.os_other:hover {
+    opacity: 1;
+}
+.ua_ie {
+    background-color: #428bca!important;
+    border-color: #357ebd!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.ua_ie:hover {
+    opacity: 1;
+}
+.ua_firefox {
+    background-color: #f0ad4e!important;
+    border-color: #eea236!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.ua_firefox:hover {
+    opacity: 1;
+}
+.ua_maxthon {
+    background-color: #7373B9!important;
+    border-color: #7373B9!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.ua_maxthon:hover {
+    opacity: 1;
+}
+.ua_ucweb {
+    background-color: #FF740F!important;
+    border-color: #d43f3a!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.ua_ucweb:hover {
+    opacity: 1;
+}
+.ua_sogou {
+    background-color: #78ACE9!important;
+    border-color: #4cae4c!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.ua_sogou:hover {
+    opacity: 1;
+}
+.ua_2345explorer {
+    background-color: #2478B8!important;
+    border-color: #4cae4c!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.ua_2345explorer:hover {
+    opacity: 1;
+}
+.ua_2345chrome {
+    background-color: #F9D024!important;
+    border-color: #4cae4c!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.ua_2345chrome:hover {
+    opacity: 1;
+}
+.ua_mi {
+    background-color: #FF4A00!important;
+    border-color: #4cae4c!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.ua_mi:hover {
+    opacity: 1;
+}
+.ua_lbbrowser {
+    background-color: #FC9D2E!important;
+    border-color: #4cae4c!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.ua_lbbrowser:hover {
+    opacity: 1;
+}
+.ua_chrome {
+    background-color: #EE6252!important;
+    border-color: #4cae4c!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.ua_chrome:hover {
+    opacity: 1;
+}
+.ua_qq {
+    background-color: #3D88A8!important;
+    border-color: #4cae4c!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.ua_qq:hover {
+    opacity: 1;
+}
+.ua_apple {
+    background-color: #E95620!important;
+    border-color: #4cae4c!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.ua_apple:hover {
+    opacity: 1;
+}
+.ua_opera {
+    background-color: #d9534f!important;
+    border-color: #d43f3a!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.ua_opera:hover {
+    opacity: 1;
+}
+.os_vista,.os_2000,.os_windows,.os_xp,.os_7,.os_8,.os_8_1 {
+    background-color: #39b3d7!important;
+    border-color: #46b8da!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.os_vista:hover,.os_2000:hover,.os_windows:hover,.os_xp:hover,.os_7:hover,.os_8:hover,.os_8_1:hover {
+    opacity: 1;
+}
+.os_android {
+    background-color: #98C13D!important;
+    border-color: #01B171!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.os_android:hover {
+    opacity: 1;
+}
+.os_ubuntu {
+    background-color: #DD4814!important;
+    border-color: #01B171!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.os_ubuntu:hover {
+    opacity: 1;
+}
+.os_linux {
+    background-color: #3A3A3A!important;
+    border-color: #1F1F1F!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.os_linux:hover {
+    opacity: 1;
+}
+.os_mac {
+    background-color: #666666!important;
+    border-color: #1F1F1F!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.os_mac:hover {
+    opacity: 1;
+}
+.os_unix {
+    background-color: #006600!important;
+    border-color: #1F1F1F!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.os_unix:hover {
+    opacity: 1;
+}
+.os_nokia {
+    background-color: #014485!important;
+    border-color: #1F1F1F!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.os_nokia:hover {
+    opacity: 1;
+}
+#ds-thread #ds-reset ul.ds-comments-tabs li.ds-tab a.ds-current {border:0px;color:#848568;text-shadow:none;background:#dddfc2}
+#ds-thread #ds-reset .ds-highlight {font-family:Arial, Helvetica, sans-serif;font-size:14px;font-weight:bold;color:#848568 !important;}
+#ds-thread #ds-reset ul.ds-comments-tabs li.ds-tab a.ds-current:hover {color:#696a52;background:#d4d6ba}
+#ds-thread #ds-reset a.ds-highlight:hover {color:#696a52 !important;}
+
+#ds-thread {padding-left:30px;}
+#ds-thread #ds-reset li.ds-post,#ds-thread #ds-reset #ds-hot-posts {overflow:visible}
+#ds-thread #ds-reset .ds-post-self {padding:10px 0 10px 10px;}
+#ds-thread #ds-reset li.ds-post,#ds-thread #ds-reset .ds-post-self {border:0 !important;}
+#ds-reset .ds-avatar, #ds-thread #ds-reset ul.ds-children .ds-avatar {position:absolute;top:26px;left:-14px;padding:0px;width:52px;height:52px;box-shadow:-1px 0 1px rgba(0,0,0,.15) inset;border-radius:50%; background:#E6E6E6;}
+#ds-thread #ds-reset ul.ds-children .ds-avatar {left:-23px;}
+#ds-thread .ds-avatar a {display:inline-block;padding:1px; width:46px;height:46px;border:1px solid #b9baa6;border-radius:50%; background-color:#fff !important;margin:1px 0 0 1px;} /* 白背景圈，要与头像大小一致 */
+#ds-thread .ds-avatar a:hover {border-color:#de5a4e}
+#ds-thread .ds-avatar > img {margin:3px 0 0 2px} /* 控制头像上面距离 */
+#ds-thread #ds-reset .ds-replybox {box-shadow:none;}/* 评论输入框 */
+#ds-thread #ds-reset ul.ds-children .ds-replybox.ds-inline-replybox a.ds-avatar,
+#ds-reset .ds-replybox.ds-inline-replybox a.ds-avatar {left: 0;top: 0; padding: 0;width: 32px !important;height: 32px !important; background: none;box-shadow: none;} 
+#ds-reset .ds-replybox.ds-inline-replybox a.ds-avatar img {width: 32px !important;height: 32px !important; border-radius:50%;} 
+#ds-reset .ds-replybox a.ds-avatar,
+#ds-reset .ds-replybox .ds-avatar img { padding:0;width:50px !important;height:50px !important; border-radius:5px;}
+#ds-reset .ds-avatar img {width:46px !important;height:46px !important;border-radius:50%;box-shadow:0 1px 3px rgba(0, 0, 0, 0.22);
+							-webkit-transition:.4s all ease-in-out;-moz-transition:.4s all ease-in-out;-o-transition:.4s all ease-in-out;-ms-transition:.4s all ease-in-out;transition:.4s all ease-in-out;
+						}
+.ds-post-self:hover .ds-avatar img {transform:rotate(720deg);-webkit-transform:rotate(720deg);-moz-transform:rotate(720deg);-o-transform:rotate(720deg);-ms-transform:rotate(720deg);border-radius:30px !important;}
+
+#ds-thread #ds-reset .ds-comment-body {background: #E6E6E6;padding:15px 15px 12px 32px;border-radius:5px; box-shadow:0 1px 2px rgba(0,0,0,.15), 0 1px 0 rgba(255,255,255,.75) inset;}/* 评论区背景色 */
+
+#ds-thread #ds-reset .ds-comment-body p{color:#787968} 
+#ds-thread #ds-reset .ds-comments a.ds-user-name {font-weight:bold;color:#696A52 !important;}
+#ds-thread #ds-reset .ds-comments a.ds-user-name:hover {color:#D32 !important;}
+
+#ds-thread #ds-reset #ds-hot-posts {border:0}
+#ds-reset #ds-hot-posts .ds-gradient-bg {background:none;}
+
+#ds-reset #ds-bubble #ds-ctx .ds-ctx-entry {padding:0;}
+#ds-reset #ds-bubble .ds-avatar, #ds-reset #ds-bubble #ds-ctx-bubble .ds-avatar a {position:static;padding:0;border:0; background:none;box-shadow:none;}
+#ds-reset #ds-bubble .ds-avatar img, #ds-reset #ds-bubble #ds-ctx-bubble .ds-avatar a {width:45px !important;height:45px !important;}
+#ds-reset #ds-bubble .ds-user-name{padding-left:13px;}
+#ds-thread #ds-reset #ds-bubble {display:none !important} /* 隐藏用户气泡提示框 */
+
+#ds-reset .ds-comment-body #ds-ctx {border-left:1px solid #b9baa6;background-color:#e8e8dc !important}
+#ds-reset #ds-ctx {margin-right:-15px}
+#ds-reset #ds-ctx .ds-ctx-entry {position:relative;padding:10px 30px 10px 10px;}
+#ds-reset #ds-ctx .ds-ctx-entry .ds-avatar {top:6px;left:5px;background:none;box-shadow:none;}
+#ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-body {margin-left:46px;}
+#ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-content {color:#787968}
+#ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {color:#696A52;font-weight:bold}
+
+/*隐藏多说底部版权*/
+#ds-thread #ds-reset .ds-powered-by {
+	display: none;
+}
+
+/** 多说最近留言样式 **/
+#ds-recent-comments .ds-avatar img{   
+    width:60px;height:60px; 
+    border-radius: 50%; 
+    -webkit-border-radius: 50%; 
+    -moz-border-radius:50%;   
+    box-shadow: inset 0 -1px 0 #3333sf;/*设置图像阴影效果*/  
+    -webkit-box-shadow: inset 0 -1px 0 #3333sf;   
+    -webkit-transition: 0.4s;      
+    -webkit-transition: -webkit-transform 0.4s ease-out;   
+    transition: transform 0.4s ease-out;
+    -moz-transition: -moz-transform 0.4s ease-out;   
+}    
+#ds-recent-comments .ds-avatar img:hover{  
+    box-shadow: 0 0 10px #fff; rgba(255,255,255,.6), inset 0 0 20px rgba(255,255,255,1);   
+    -webkit-box-shadow: 0 0 10px #fff; rgba(255,255,255,.6), inset 0 0 20px rgba(255,255,255,1);   
+    transform: rotateZ(360deg);
+    -webkit-transform: rotateZ(360deg);   
+    -moz-transform: rotateZ(360deg);   
+}
+
+/*博主标记 CSS*/
+.sskadmin {
+    background-color: #00a67c!important;
+    border-color: #01B171!important;
+    border-radius: 4px;
+    padding: 0 5px!important;
+    opacity: .4;
+}
+.sskadmin:hover {
+    opacity: 1;
+}
+
+#ds-recent-visitors .ds-avatar img {
+width: 60px;
+height: 60px;     /*设置图像的长和宽，这里要根据自己的评论框情况更改*/
+border-radius: 27px;     /*设置图像圆角效果,在这里我直接设置了超过width/2的像素，即为圆形了*/
+-webkit-border-radius: 27px;     /*圆角效果：兼容webkit浏览器*/
+-moz-border-radius: 27px;
+box-shadow: inset 0 -1px 0 #3333sf;     /*设置图像阴影效果*/
+-webkit-box-shadow: inset 0 -1px 0 #3333sf;
+-webkit-transition: 0.4s;
+-webkit-transition: -webkit-transform 0.4s ease-out;
+transition: transform 0.4s ease-out;     /*变化时间设置为0.4秒(变化动作即为下面的图像旋转360读）*/
+-moz-transition: -moz-transform 0.4s ease-out;
+}
+
+#ds-recent-visitors .ds-avatar img:hover {
+/*设置鼠标悬浮在头像时的CSS样式*/    box-shadow: 0 0 10px #fff;
+rgba(255, 255, 255, .6), inset 0 0 20px rgba(255, 255, 255, 1);
+-webkit-box-shadow: 0 0 10px #fff;
+rgba(255, 255, 255, .6), inset 0 0 20px rgba(255, 255, 255, 1);
+transform: rotateZ(360deg);     /*图像旋转360度*/
+-webkit-transform: rotateZ(360deg);
+-moz-transform: rotateZ(360deg);
+}
+
+/*隐藏分享*/
+.ds-sync{display:none !important;}
+
+/* 自定义评论框内的颜色，字体，大小 */
+#ds-thread #ds-reset .ds-textarea-wrapper textarea, #ds-thread #ds-reset .ds-textarea-wrapper .ds-hidden-text {font-family: ‘微软雅黑’ ‘Microsoft Yahei’!important;font-size:15px;letter-spacing:1px;}
+
+/* 自定义发布按钮字体和渐变颜色 */
+#ds-thread #ds-reset .ds-post-button {font-weight: normal;font-size: 12px;text-shadow: none;border: 0;line-height: 23px;background: #58c5c7;color:#fff;width: 100px;border-radius: 0 0 5px 0;}
+
+/* 透明评论框 */
+/*评论框背景色*/
+#ds-thread #ds-reset .ds-textarea-wrapper textarea, #ds-thread #ds-reset .ds-textarea-wrapper .ds-hidden-text {min-height: 40px;background: #cfcfcf;}
+#ds-thread #ds-reset .ds-textarea-wrapper textarea:focus {color: #000000;}
+#ds-reset .ds-gradient-bg{
+background:none !important;
+}/*设置评论框下方渐变*/
+
+<!-- http://www.shejidaren.com/use-css3-to-create-a-beautiful-comment-ui.html -->

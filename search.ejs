@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <% var url = config.url + config.root %>
+  <% if(posts){ %>
+    <% posts.each(function(post){ %>
+    <entry>
+      <title><%-: post.title | cdata %></title>
+      <url><%- encodeURI(post.permalink) %></url>
+	  <content type="html"><%-: minify(stripe(stripe_code(post.content))) | cdata %></content>
+     
+    </entry>
+    <% }) %>
+  <% } %>
+  <% if(pages){ %>
+    <% pages.each(function(page){ %>
+    <entry>
+      <title><%-: page.title | cdata %></title>
+      <url><%- encodeURI(page.permalink) %></url>
+	  <content type="html"><%-: minify(stripe(stripe_code(page.content))) | cdata %></content>
+      
+    </entry>
+    <% }) %>
+  <% } %>
+</search>

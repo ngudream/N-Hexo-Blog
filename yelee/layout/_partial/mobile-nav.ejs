@@ -1,0 +1,42 @@
+<nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页"><%=theme.author%></a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="<%= config.root %>" class="profilepic">
+                <!-- <img src="<%- theme.root_url %><%=theme.avatar%>" class="animated rotateIn" style="-vendor-animation-duration: 3s;-vendor-animation-delay: 2s;-vendor-animation-iteration-count: infinite;"> -->
+				<img src="<%- theme.root_url %><%=theme.avatar%>" >
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="<%= config.root %>" title="回到主页"><%=theme.author%></a></h1>
+            </hgroup>
+            <% if (theme.subtitle){ %>
+            <p class="header-subtitle"><%=theme.subtitle%></p>
+            <%}%>
+            <nav class="header-menu">
+                <ul>
+                <% for (var i in theme.menu){ %>
+                    <li><a href="<%- url_for(theme.menu[i]) %>"><%= i %></a></li>
+                <%}%>
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            <% for (var i in theme.subnav){ %>
+								<% if(i == "WeChat") {%>
+									<a class="fa <%= i %>" title="微信" target="_self" href="<%- url_for(theme.subnav[i]) %>""></a>
+								<%} else if (i == "QQ"){%>
+									<a class="fa <%= i %>" title="<%= i %>" target="_self" href="<%- url_for(theme.subnav[i]) %>"></a>
+								<%} else {%>
+									<a class="fa <%= i %>" target="_blank" href="<%- url_for(theme.subnav[i]) %>" title="<%= i %>"></a>
+								<% } %>
+                            <%}%>
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="<%= __('index.tags') %>" friends="<%= __('index.friends') %>" about="<%= __('index.about') %>"/>
+</nav>

@@ -1,0 +1,483 @@
+<% if (theme.github_widget){ %>
+<%- js('js/GithubRepoWidget') %>
+<% } %>
+<script data-main="<%- config.root %>js/main.js" src="<%- theme.CDN.require %>"></script>
+<%- partial('_partial/background') %>
+<%- partial('comments/count-comment') %>
+<%- partial('google-analytics') %>
+<% if (theme.mathjax){ %>
+<%- partial('mathjax') %>
+<% } %>
+<%- partial('scrolling-button') %>
+<%- partial('open-in-new-tab', {
+    global: theme.open_in_new.global
+}) %>
+<%- partial('tab-title-change') %>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+<script><!-- 添加 InstantClick 预加载 -->
+<!-- 这段代码的含义是每次页面重载时，通过直接的函数调用来实现MathJax、百度统计、Google Code Prettify、Google Analytics的重新运行 -->
+		if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
+			jQuery.getScript("/js/instantclick.min.js")
+				.done(function() {
+					InstantClick.on('change', function (isInitialLoad) {
+						if (isInitialLoad === false) {
+							if (typeof MathJax !== 'undefined') // support MathJax
+								MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+							if (typeof prettyPrint !== 'undefined') // support google code prettify
+								prettyPrint();
+							if (typeof _hmt !== 'undefined')  // support 百度统计
+								_hmt.push(['_trackPageview', location.pathname + location.search]);
+							if (typeof ga !== 'undefined')  // support google analytics
+								ga('send', 'pageview', location.pathname + location.search);
+						}
+					});
+					//InstantClick.init();//暂时不使用预加载，问题比较多
+				})
+				.fail(function() {
+			  
+				});
+		} else {
+		}
+</script>
+
+<!-- prettify代码高亮脚本引入 http://jumpbyte.cn/2016/07/02/use-and-install-prettify/-->
+<% if (config.prettify.enable){ %>
+<script src="/plugins/prettify/prettify.min.js"></script>
+<% } %>
+
+<script type="text/javascript" data-no-instant>
+
+    $(document).ready(function () {
+        var totalwidth = $(window).width();
+		//本机宽度798、高度638
+        <!-- 控制标题是否滚动 -->
+        var titles = document.getElementsByClassName("archive-item-title");
+        for (var i = 0; i < titles.length; i++) {
+            var title = titles[i];
+            <!-- 设置标题最大显示长度 -->
+            if (totalwidth >= 1800) {
+                title.style.maxWidth = "600px";
+            } else if (totalwidth >= 1550 && totalwidth < 1800) {
+                title.style.maxWidth = "500px";
+            } else if (totalwidth < 700) {
+                title.style.maxWidth = "300px";
+                title.style.marginLeft = "-10px";
+            }
+
+            <!--　添加跑马灯效果 -->
+            var marquee = false;
+            var realLength = 0;
+            var str = title.innerText;
+            for (var j = 0; j < str.length; j++) {
+                charCode = str.charCodeAt(j);
+                if (charCode >= 0 && charCode <= 128) {
+                    realLength += 1;
+                } else {
+                    realLength += 2;
+                }
+            }
+            var max = 40;
+            if (totalwidth < 700) {
+                max = 34;
+            }
+            if (realLength > max) {
+                marquee = true;
+            }
+            if (marquee) {
+                var mar = document.createElement("marquee");
+                mar.setAttribute("behavior", "scroll");
+                mar.onmouseover = function () {
+                    this.stop();
+                }
+                mar.onmouseout = function () {
+                    this.start();
+                }
+                var parent = title.parentNode;
+                var _title = title.cloneNode(true);
+                mar.appendChild(_title);
+                parent.replaceChild(mar, title);
+            }
+        }
+
+        //设置页面标题
+        var str = document.title;
+        if (str.indexOf("移动开发") != 0) {
+            arr = str.split("|");
+            document.title = arr[0] + "|" + arr[2];
+        }
+
+        <!-- 代码的复制功能 -->
+        var clipboard = new Clipboard('.copyspan');
+        var nodes = document.getElementsByTagName("pre");
+        for (var i = 0; i < nodes.length; i++) {
+            var code = nodes[i];
+            code.onmouseover = function () {//鼠标进入时再显示复制按钮
+                $(this).find(".copyspan").show();
+            }
+            code.onmouseout = function () {
+                $(this).find(".copyspan").hide();
+            }
+            <!-- 添加复制按钮 -->
+            var span = document.createElement("span");
+            span.className = "copyspan";
+            span.style.width = "100%";
+            span.style.textAlign = "right";
+            var copy = document.createElement("i");
+            copy.style.cursor = "pointer";
+            <!--  设置鼠标手形 -->
+            copy.style.float = "right";
+            copy.style.marginRight = "10px"
+            copy.className = "fa fa-clipboard";
+            copy.setAttribute("title", "●'◡'●点我复制");
+            span.setAttribute("data-clipboard-text", code.innerText);
+            <!-- 复制的内容为code块 -->
+            span.appendChild(copy);
+            var height = code.offsetHeight;
+            if (totalwidth > 700) {
+                if (height > 100) {
+                    copy.style.marginTop = "5px"
+                    code.insertBefore(span, code.firstChild);
+                }
+            } else {
+                if (height > 100) {
+                    //code.insertAfter(span, code.firstChild);
+                    insertAfter(span, code.firstChild);
+                }
+            }
+            $(span).hide();
+        }
+
+        <!-- 在节点targetEl后面播入一个新元素newEl -->
+        function insertAfter(newEl, targetEl) {
+            var parentEl = targetEl.parentNode;
+            if (parentEl.lastChild == targetEl) {
+                parentEl.appendChild(newEl);
+            } else {
+                parentEl.insertBefore(newEl, targetEl.nextSibling);
+            }
+        }
+
+        <% if (config.prettify.enable){ %>
+			$('pre').addClass('prettyprint linenums').attr('style', 'white-space:pre;word-break: keep-all;overflow:auto;height:auto;width:auto;padding-top:5px;padding-bottom:5px;');
+			<!-- 控制代码高度和滚动条 -->
+			prettyPrint();
+        <% } %>
+
+        //宽屏时设置页面宽度
+        if (totalwidth >= 1800) {
+            $(".body-wrap").css("max-width", "85em");
+            $(".body-wrap").css("width", "85em");
+        } else if (totalwidth >= 1500 && totalwidth < 1800) {
+            $(".body-wrap").css("max-width", "70em");
+            $(".body-wrap").css("width", "70em");
+        } else if (totalwidth <= 700) {
+            <!-- 设置移动端页面样式 -->
+            <% if (is_post() || is_archive() || is_category() || is_tag()) { %>
+				$(".article").each(function () {
+					$(this).css("margin-top", "0.625rem").css("margin-left", "-0.35rem").css("margin-right", "0.3rem").css("margin-bottom", "0.625rem");
+				})
+            <% } else { %>
+				$(".article").each(function () {
+					$(this).css("margin-top", "0.625rem").css("margin-left", "0.35rem").css("margin-right", "0.3rem").css("margin-bottom", "0.625rem");
+				})
+            <% } %>
+			
+			var curUrl = window.location.pathname;
+			var tagUrl = "/tags/"
+			var guestUrl = "/guestbook/";
+			var aboutUrl = "/about/";
+			if(curUrl == tagUrl || curUrl == guestUrl || curUrl == aboutUrl){
+				$(".article").each(function () {
+					$(this).css("margin-top", "0.625rem").css("margin-left", "-0.35rem").css("margin-right", "0.3rem").css("margin-bottom", "0.625rem");
+				})
+			}
+
+            //设置标题大小
+            $(".article-title-big").each(function () {
+                $(this).css("margin-left", "5px").css("font-size", "1.5rem");
+            })
+
+            $(".article-info-post").each(function () {
+                $(this).css("margin-left", "5px");
+            })
+        }
+
+        //if (totalwidth <= 800) {
+        //   var marquee = document.getElementsByClassName("guestbook-marquee");
+        //    marquee.stop();
+        //}
+
+        //给标题加上序号
+        <% if(is_post()){ %>
+			var h2s = document.getElementsByTagName("h2");
+			for (var i = 0; i < h2s.length; i++) {//控制h2标题的间隔
+				var h2 = h2s[i];
+				h2.style.marginTop = "0.5em";
+				h2.style.marginBottom = "0.3em";
+			}
+
+			var h3s = document.getElementsByTagName("h3");
+			for (var i = 0; i < h3s.length; i++) {//控制h3标题的间隔
+				var h3 = h3s[i];
+				h3.style.marginTop = "0.3em";
+				h3.style.marginBottom = "0.3em";
+			}
+
+			var h4s = document.getElementsByTagName("h4");
+			for (var i = 0; i < h4s.length; i++) {//控制h4标题的间隔
+				var h4 = h4s[i];
+				h4.style.marginTop = "0.15em";
+				h4.style.marginBottom = "0.15em";
+			}
+
+			var $article = $(".article-entry");
+			var count = [0, 0, 0, 0, 0, 0];
+			var mark = [0, 0, 0, 0, 0, 0];
+
+			(function setMark() {
+				var hTag = ["h1", "h2", "h3", "h4", "h5", "h6"];
+				var index = 0;
+				for (var i = 0; i < 6; ++i) {
+					if ($article.children(hTag[i]).length > 0) {
+						++index;
+						mark[i] = index;
+					}
+				}
+			})();
+
+			$article.children(":header").each(function () {
+				var t = $(this);
+				var pos = 0;
+				switch (t[0].tagName) {
+					case "H1":
+						pos = 0;
+						break;
+					case "H2":
+						pos = 1;
+						break;
+					case "H3":
+						pos = 2;
+						break;
+					case "H4":
+						pos = 3;
+						break;
+					case "H5":
+						pos = 4;
+						break;
+					case "H6":
+						pos = 5;
+						break;
+				}
+
+				var len = mark[pos];
+				if (len < 6) {
+					count[len] = 0;
+				}
+				count[len - 1]++;
+
+				var listStr = count[0] + "";
+				for (var i = 1; i < len; ++i) {
+					listStr += "." + count[i];
+				}
+				listStr += "  ";
+				t.html(listStr + t.html());
+			});
+			if (navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)) {
+				<!-- 移动端不显示提示 -->
+				$("#copyright_author").attr("class", "");
+				$("#copyright_url").attr("class", "");
+				$("#copyright_license").attr("class", "");
+			}
+        <% } else { %>
+        //if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)) {
+        //	var heartspan = "<span class='htmleaf-links'><i class='heart' id='like3' rel='like'></i></span>";
+        //	$("#footerdiv").append(heartspan);
+        //底部红心动画
+        //	$('body').on("click", '.heart', function () {
+
+        //		var A = $(this).attr("id");
+        //		var B = A.split("like");
+        //		var messageID = B[1];
+        //		var C = parseInt($("#likeCount" + messageID).html());
+        //		$(this).css("background-position", "")
+        //		var D = $(this).attr("rel");
+
+        //		if (D === 'like') {
+        //			$("#likeCount" + messageID).html(C + 1);
+        //			$(this).addClass("heartAnimation").attr("rel", "unlike");
+        //		}
+        //		else {
+        //			$("#likeCount" + messageID).html(C - 1);
+        //			$(this).removeClass("heartAnimation").attr("rel", "like");
+        //			$(this).css("background-position", "left");
+        //		}
+        //	});
+        //}
+        <% } %>
+		
+        if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)) {
+            //running
+            if (totalwidth <= 900) {
+                $(".body-wrap").css("margin-bottom", "116px");
+            }
+            var runningDiv = "<div style='display:inline;'><span class='my-face' style='vertical-align:middle;'>小伙子，不要懒惰</span><a id='running_link' href='/running/index.html' target='_blank' data-no-instant><img src='/img/keep.png' style='vertical-align:middle;' /><img src='/img/keep.png' style='vertical-align:middle;' /><img src='/img/keep.png' style='vertical-align:middle;' /><img src='/img/keep.png' style='vertical-align:middle;' /><img src='/img/keep.png' style='vertical-align:middle;' /><img src='/img/keep.png' style='vertical-align:middle;' /></a></div>";
+            $(runningDiv).insertBefore("#web_count_div");
+            //添加左边栏ngudream效果
+            $("#ngudream_name").attr("class", "header-author cl-effect-2");
+            //移动端就不需要加载这几个图片了
+            $("#qq_div").append("<img id='my_qq' src='/img/qq.jpg' style='cursor:pointer; margin-top:-8px;' />");
+            $("#wechat_div").append("<img id='my_wechat' src='/img/wechat.jpg' style='cursor:pointer' />");
+            $("#bee_div").append("<img src='/img/bee.png' />");
+			//不显示右下角的搜索按钮
+			$("#cb-close-btn").css("opacity", 0);
+			$("#cb-search-btn").css("opacity", 0);
+			var totalHeight = screen.height;
+			<% if (!is_post()) { %>
+				if(totalHeight >= 1000){//左边栏足够高才显示图片
+					$("#left_col_div").append("<div align=center id='left_show_div' ><img src='/img/2016_year.png' id='2016_year' style='cursor:pointer;'/></div>");
+					$("#2016_year").click(function() {
+						//$(this).remove();
+						$(this).css("opacity", 0);
+						$(this).parent().append("<img src='/img/eyes.gif' style='position:absolute; margin-left:-270px;cursor:pointer;' id='eyes_img'/>");
+						$("#eyes_img").click(function() {
+							$(this).remove();
+							$("#2016_year").css("opacity", 1);
+						});
+					});
+				}
+			<% } %>
+			var curUrl = window.location.pathname;
+			var tagUrl = "/tags/"
+			var guestUrl = "/guestbook/";
+			var aboutUrl = "/about/";
+			var archiveUrl = "/archives/";
+			var welfareUrl = "/404.html";
+			if(curUrl == tagUrl || curUrl == guestUrl || curUrl == aboutUrl || curUrl == archiveUrl || curUrl == welfareUrl){
+				$(".tips-inner").find("li")[4].remove();
+			}
+			<% if(is_category() || is_tag()){ %>
+				$(".tips-inner").find("li")[4].remove();
+			<% } %>
+			console.log("screen.height = " + screen.height + ", screen.width = " + screen.width);
+        } else {
+            $(".body-wrap").css("margin-bottom", "110px");//移动端页面底部距离大一点
+            if (totalwidth > 900) {
+                $("<link>")
+                        .attr({
+                            rel: "stylesheet",
+                            type: "text/css",
+                            href: "/plugins/hint/hint.min.css"
+                        })
+                        .appendTo("head");
+                $("<link>")
+                        .attr({
+                            rel: "stylesheet",
+                            type: "text/css",
+                            href: "/plugins/font/style3.css"
+                        })
+                        .appendTo("head");
+                $("<link>")
+                        .attr({
+                            rel: "stylesheet",
+                            type: "text/css",
+                            href: "/plugins/heart/style.css"
+                        })
+                        .appendTo("head");
+            }
+            //左边栏缩小
+            if (totalwidth > 900 && totalwidth < 1200) {
+                $(".left-col").css("width", "250px");
+                $(".mid-col").css("margin-left", "-50px");
+                <% if (is_post()) { %>
+                $("#toc").css("width", "180px");
+                $("#tocButton").css("margin-left", "-50px");
+                $("#post-nav-button").css("margin-left", "-50px");
+                <% } %>
+            }
+            //监听横竖屏转
+            window.addEventListener('orientationchange', function (event) {
+                if (window.orientation == 180 || window.orientation == 0) {
+                    window.location.reload();//横屏
+                    //$("#cb-search-div").removeAttr("style");
+                    //$("#cb-search-div").css("float", "left").css("margin-left", "15px");
+                } else {
+                    window.location.reload();//竖屏
+                }
+            });
+
+            $("#cb-search-content").removeAttr("style");
+            $("#cb-search-content").css("margin-left", "-115px").css("width", "70%").css("font-size", "1.2em").css("height", "30px")
+                    .css("margin-top", "80px").css("border-radius", "50px");
+            $("#cb-close-div").css("margin-top", "50px")
+
+            //移动端显示公益为腾讯404
+            $("#publicwelfare").attr("href", "/publicwelfare/baby-back-home.html");
+        }
+
+        <% if (false && is_post()) { %>
+        //复制网页内容自动添加版权信息
+        var copyright = document.getElementsByClassName("copyright");
+        if (copyright.length > 0) {
+            function addCopyRight() {
+                var clipboard = new Clipboard('.copycontent');
+                var body_element = document.body;
+                var selection = window.getSelection();
+                if (window.clipboardData) { // Internet Explorer
+                    var pagelink = "\r\n\r\n 原文出自「ngudream」转载请保留原文链接: " + document.location.href + "";
+                    var copytext = selection + pagelink;
+                    window.clipboardData.setData("Text", copytext);
+                    return false;
+                } else {
+                    var pagelink = "\r\n 原文出自「ngudream」转载请保留原文链接: " + document.location.href + "";
+                    var copytext = selection + pagelink;
+                    var newdiv = document.createElement('div');
+                    newdiv.className = "copycontent";
+                    newdiv.setAttribute("data-clipboard-text", copytext);
+                    body_element.appendChild(newdiv);
+                    newdiv.click();
+                    //selection.selectAllChildren(newdiv);
+                    window.setTimeout(function () {
+                        body_element.removeChild(newdiv);
+                    }, 0);
+                }
+                clipboard.destroy();
+            }
+
+            document.oncopy = addCopyRight;
+        }
+        <% } %>
+
+        //处理百度分享
+        var elem = document.getElementsByClassName("bdsharebuttonbox");
+        if (elem.length > 0) {
+            var elemDiv = elem[0];
+            var elem_child = elemDiv.childNodes;//得到参数元素的所有子元素
+            for (var i = 0; i < elem_child.length; i++) { //遍历子元素
+                var childA = elem_child[i];
+                if (childA.className == "fa fa-share-alt bds_more") {
+                    childA.parentNode.removeChild(childA);//删除更多
+                    continue;
+                }
+                if (childA.className != undefined) {
+                    var span = document.createElement("span");
+                    var _sel = childA.cloneNode(true);
+                    _sel.title = "";
+                    span.appendChild(_sel);
+                    span.setAttribute("class", "hint  hint--top");
+                    span.setAttribute("data-hint", childA.title);
+                    childA.parentNode.replaceChild(span, childA);
+                }
+            }
+        }
+    });
+</script>

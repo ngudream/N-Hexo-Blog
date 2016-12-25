@@ -1,0 +1,134 @@
+<article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %>" itemscope itemprop="blogPost">
+  <%if(post.noDate != "true"){%>
+    <div class="article-meta">
+      <%- partial('post/date', {class_name: 'article-date', date_format: null}) %>
+    </div>
+  <%}%>
+  
+  <% if (index && (post.description || post.excerpt)){ %> <!-- 文章简介，即首页列表 -->
+  
+  <!-- 首页标题背景色 -->
+	<%
+	var list_block_type = theme.list_block_type;
+	var list_box_css = '';
+	var list_item_css = '';
+	if (list_block_type == 'conbine') {
+		list_box_css = 'ui raised segment';
+		list_item_css = '';
+	} else {
+		list_box_css = '';
+		list_item_css = 'ui piled raised segment';
+	}
+	%>
+	
+	<%
+	var color_map = ['black', 'green', 'red', 'blue', 'orange', 'purple', 'teal'];
+	var color = 'teal';
+	var color_index = Math.ceil(Math.random()*(color_map.length-1));
+	color = color_map[color_index];
+	if (!color) {
+		color = 'teal';
+	}
+	%>
+	
+  <div class="<%= list_item_css %> box-archive-item" itemscope itemtype="http://schema.org/Article" > <!-- 概要 -->
+
+    <% if (theme.fancybox){ %>
+      <input type="hidden" class="isFancy" />
+    <% } %>
+	
+	<div class="ui <%= color %> ribbon label" style="line-height: 1.3; min-width:100px; max-width:450px;"> <!-- 标题 -->
+		<span class="archive-item-title" style="display:block; height:100%; max-width:400px;white-space:nowrap; text-transform:capitalize;" >
+			<%- partial('post/title', {class_name: 'article-title'}) %>
+		</span>
+	</div>
+	<div onclick="window.open('<%- url_for(post.path) %>','_self')" style="margin-top:20px; line-height: 1.65em;cursor:pointer">
+          <% if (post.description){ %>
+              <%- post.description %>
+          <% } else { %>
+              <%- post.excerpt %>
+          <% } %>
+    </div>
+    <% if (index){ %>
+    <div class="article-info article-info-index">
+      <%if(post.top){%>
+        <div class="article-pop-out tagcloud">
+          <a class="">置顶</a>
+        </div>
+      <% } %>
+      <%- partial('post/category') %>
+      <%- partial('post/tag') %>
+      <% if (index && (post.description || post.excerpt)){ %>
+        <p class="article-more-link">
+          <a <% if (!theme.excerpt_link){ %>class="hidden"<% } %> href="<%- url_for(post.path) %>#more">
+				<span class="link link--yaku">
+					<span>发</span><span>现</span><span>更</span><span>多 >></span>
+				</span>
+		  </a>
+		  <!-- <%= theme.excerpt_link %> >> -->
+        </p>
+      <% } %>
+      <div class="clearfix"></div>
+    </div>
+    <% } %>
+  </div>
+
+ <% } else { %> <!-- 文章主内容 -->
+  <% if (post.link || post.title){ %>
+      <header class="article-header">
+        <%- partial('post/title', {class_name: 'article-title-big'}) %>
+      </header>
+      <% if (!index){ %>
+      <div class="article-info article-info-post">
+        <%- partial('post/category') %>
+        <%- partial('post/tag') %>
+        <div class="clearfix"></div>
+      </div>
+      <% } %>
+    <% } %>
+          <div id="article-content" class="article-entry" itemprop="articleBody">
+			  <% if (is_page()){ %>
+				  <%- partial('_partial/page') %>
+			  <% } %>
+			<%- post.content %>
+		</div>
+      <% } %>
+  <% if (!index){ %>
+    <%- partial('post/nav') %>
+  <% } %>
+</article>
+<%- partial('_partial/toc') %>
+
+<% if (!index && theme.share.on && (post.share != false || post.share)){ %>
+    <%- partial('post/share') %>
+<% } %>
+
+<% if (!index && post.comments){ %>
+    <% if (theme.duoshuo.on) { %>
+      <%- partial('comments/duoshuo', {
+          key: post.path,
+          title: post.title,
+          url: config.url+url_for(post.path),
+          }) %>
+    <% } else if (theme.youyan.on) { %>
+        <%- partial('comments/youyan') %>
+    <% } else if (theme.disqus.on) { %>
+        <%- partial('comments/disqus', {
+            shortname: theme.disqus.shortname
+          }) %>
+    <% } else if (config.disqus_shortname) { %>
+        <%- partial('comments/disqus', {
+            shortname: config.disqus_shortname
+          }) %>
+    <% } %>
+<% } %>
+
+<%- partial('_partial/post-nav-button') %>
+
+<% if (!index) { %>
+    <script>
+        <% if (post.fancybox === false){ %>
+            yiliaConfig.fancybox = false;
+        <% } %>
+    </script>
+<% } %>

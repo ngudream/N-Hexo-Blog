@@ -1,0 +1,126 @@
+<hr>
+<br>
+<%- list_categories({depth: 1}) %>
+<p class="count"></p>
+<style>
+
+	.category-list{
+	display:inline-block;
+	margin:0 auto;
+	list-style:none;
+	}
+    .category-list li{
+        display: inline-block;
+        margin: 0 1em .5em 0;
+        padding: 4px;
+        font-size: 1.2rem;
+		background:#ffffff;
+		list-style:none;
+    }
+   
+    .category-list-count {
+        margin-left: 2px;
+        font-size: 1.3rem;
+		float:right;
+		padding:6px 2px 2px 2px;
+    }
+	
+    .article-entry ul li:before{ display: none; }
+    .article-inner { text-align: center; }
+	
+.category-list-link {
+	outline: none;
+	text-decoration: none;
+	position: relative;
+	font-size: 1.3em;
+	line-height: 1.4;
+	display: inline-block;
+}
+
+/* Yaku */
+.category-list-link {
+	color: #36648B;
+	font-family: 'Playfair Display';
+	font-weight: 400;
+	text-transform: uppercase;
+	font-size: 1.3em;
+	overflow: hidden;
+	padding: 0 0 10px;
+}
+
+.category-list-link::before {
+	content: '';
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	border-width: 1px 0;
+	border-color: #36648B;
+	border-style: solid;
+	left: 0;
+	-webkit-transform: translate3d(-101%,0,0);
+	transform: translate3d(-101%,0,0);
+	-webkit-transition: -webkit-transform 0.5s;
+	transition: transform 0.5s;
+}
+
+.category-list-link:hover::before {
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+.category-list-link span {
+	display: inline-block;
+	position: relative;
+	-webkit-transform: perspective(1000px) rotate3d(0,1,0,0deg);
+	transform: perspective(1000px) rotate3d(0,1,0,0deg);
+	-webkit-transition: -webkit-transform 0.5s, color 0.5s;
+	transition: transform 0.5s, color 0.5s;
+}
+
+.category-list-link:hover span {
+	color: #1e1a1b;
+	-webkit-transform: perspective(1000px) rotate3d(0,1,0,360deg);
+	transform: perspective(1000px) rotate3d(0,1,0,360deg);
+}
+
+.category-list-link span:nth-child(4),
+.category-list-link:hover span:first-child {
+	-webkit-transition-delay: 0s;
+	transition-delay: 0s;
+}
+
+.category-list-link span:nth-child(3),
+.category-list-link:hover span:nth-child(2) {
+	-webkit-transition-delay: 0.1s;
+	transition-delay: 0.1s;
+}
+
+.category-list-link span:nth-child(2),
+.category-list-link:hover span:nth-child(3) {
+	-webkit-transition-delay: 0.2s;
+	transition-delay: 0.2s;
+}
+
+.category-list-link span:first-child,
+.category-list-link:hover span:nth-child(4) {
+	-webkit-transition-delay: 0.3s;
+	transition-delay: 0.3s;
+}
+
+</style>
+
+<% if (site.tags.length){ %>
+    <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+    <div class="widget-wrap">
+        <div id="myCanvasContainer" class="widget-tagcloud">
+            <canvas width="400" height="400" id="resCanvas" style="width=100%; background:#80000;">
+                <%- tagcloud({
+      color: true,
+      start_color: 'blue',
+      end_color: 'green',
+  }) %>
+            </canvas>
+        </div>
+    </div>
+<% } %>
