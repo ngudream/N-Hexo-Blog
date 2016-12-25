@@ -3,12 +3,12 @@
 **修改自[MOxFIVE](http://moxfive.xyz/)的[yelee](https://github.com/MOxFIVE/hexo-theme-yelee)主题**
 
 ### 1、安装Node.js
-sudo add-apt-repository ppa:chris-lea/node.js
-sudo apt-get update
-sudo apt-get install nodejs
+	sudo add-apt-repository ppa:chris-lea/node.js
+	sudo apt-get update
+	sudo apt-get install nodejs
 
 ### 2、安装hexo
-sudo npm install hexo -g
+	sudo npm install hexo -g
 
 ### 3、插件安装
 （1）安装hexo-deployer-Git
