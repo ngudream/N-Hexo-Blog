@@ -1,7 +1,9 @@
+/* 字往下掉 */
 .rw-words{
 	display: inline;
 	line-height: 1.75;
 }
+
 .rw-words-1 span{
 	position: absolute;
 	opacity: 0;
@@ -10,9 +12,9 @@
 	font-weight:normal;
 	-webkit-transform-origin: 10% 75%;
 	transform-origin: 10% 75%;
-	-webkit-animation: rotateWord 15s linear infinite 0s;
-	-ms-animation: rotateWord 15s linear infinite 0s;
-	animation: rotateWord 15s linear infinite 0s;
+	-webkit-animation: rotateWord 18s linear infinite 0s;
+	-ms-animation: rotateWord 18s linear infinite 0s;
+	animation: rotateWord 18s linear infinite 0s;
 }
 .rw-words-1 span:nth-child(2) { 
     -webkit-animation-delay: 3s; 
