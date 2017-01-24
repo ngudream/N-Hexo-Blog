@@ -72,19 +72,23 @@ http://www.jianshu.com/p/c2ba9533088a
 
 主要修改点如下：
 （1）、在进入文章页面时，要设置以下，要不文章是看不见的：
-```
-$(".article").css("opacity", "1.0");
-```
+
+	$(".article").css("opacity", "1.0");
+
 （2）、多说评论在click2show.ejs中要主动调用
-```
-if (typeof DUOSHUO !== 'undefined'){
-	DUOSHUO.EmbedThread('.ds-thread');
-}
-```
+
+	if (typeof DUOSHUO !== 'undefined'){
+		DUOSHUO.EmbedThread('.ds-thread');
+	}
+
 （3）、处理文章目录，要在 InstantClick change 后主动调用 toc.js 中的方法，要不然目录的显示隐藏、双击打开等都无法使用。详情见 after-footer.ejs 文件；
+
 （4）、左边栏的搜索，要在 InstantClick change 后主动调用 main.js 中的搜索函数，即 after-footer.ejs 文件中的 leftSearch()；
+
 （5）、在文章页面，左边栏的鸟屋弹出菜单，要在 InstantClick change 后主动调用 pc.js 中的搜索函数，即 after-footer.ejs 文件中的 tipBoxFunc()；
+
 （6）、还修改了社交图标点击、不蒜子统计、复制功能 clipboard 等，具体可以参考源代码 [N-Hexo-Blog](https://github.com/ngudream/N-Hexo-Blog)
+
 （7）、to-do：年后找时间将博客全部适配 InstantClick
 
 ### 5、部署
