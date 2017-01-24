@@ -1,4 +1,4 @@
-# ngudream的Hexo博客源码
+# [ngudream](http://ngudream.com) 的 Hexo 博客源码
 
 **修改自 [MOxFIVE](http://moxfive.xyz/) 的 [yelee](https://github.com/MOxFIVE/hexo-theme-yelee) 主题**
 
