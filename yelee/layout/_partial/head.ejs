@@ -8,49 +8,74 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="author" content="<%= config.author %>" />
 
-<script><!-- 移动端不需要的样式不加载 -->
+<script data-no-instant><!-- 移动端不需要的样式不加载 -->
 		function includeLinkStyle(url) {
 			var link = document.createElement("link");
 			link.rel = "stylesheet";
 			link.type = "text/css";
 			link.href = url;
+			var attr = document.createAttribute('data-no-instant');
+			link.setAttributeNode(attr);
 			document.getElementsByTagName("head")[0].appendChild(link);
 		}
-		
+
 		function includeJavaScript(url){
-			var scriptObj = document.createElement("script"); 
-			scriptObj.src = url; 
-			scriptObj.type = "text/javascript"; 
+			var scriptObj = document.createElement("script");
+			scriptObj.src = url;
+			scriptObj.type = "text/javascript";
+			var attr = document.createAttribute('data-no-instant');
+			scriptObj.setAttributeNode(attr);
 			document.getElementsByTagName("head")[0].appendChild(scriptObj);
 		}
-		
+
 		if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
-			includeLinkStyle("/plugins/hint/hint.min.css");
-			includeLinkStyle("/plugins/font/style3.css");
+			includeLinkStyle("/plugins/css/special.css");
+		//	includeLinkStyle("/plugins/font/style3.css");
+
 		//	includeLinkStyle("/plugins/heart/style.css");
-			includeLinkStyle("/search/css/cb-search.css");
+		//	includeLinkStyle("/search/css/cb-search.css");
 			<% if (theme.favicon){ %>
 				var link = document.createElement("link");
 				link.rel = "shortcut icon";
 				link.href = "<%- theme.root_url %><%- theme.favicon %>";
 				document.getElementsByTagName("head")[0].appendChild(link);
 			<% } %>
-		} else if(navigator.userAgent.match(/(iPhone|iPod|iPad|ios)/i)) {
-			var link = document.createElement("link");
-			link.rel = "apple-touch-icon";
-			link.href = "<%- theme.root_url %>/img/favicon.ico";
-			document.getElementsByTagName("head")[0].appendChild(link);
-			includeLinkStyle("/search/css/cb-search-mobile.css");
 		} else {
+			if(navigator.userAgent.match(/(iPhone|iPod|iPad|ios)/i)){
+				var link = document.createElement("link");
+				link.rel = "apple-touch-icon";
+				link.href = "<%- theme.root_url %>/img/favicon.ico";
+				document.getElementsByTagName("head")[0].appendChild(link);
+			}
+			includeLinkStyle("/plugins/prettify/themes/<%= config.prettify.theme %>.css");
 			includeLinkStyle("/search/css/cb-search-mobile.css");
+		}
+
+		function loadJS(url, callback){
+			var scriptObj = document.createElement("script");
+			scriptObj.src = url;
+			scriptObj.type = "text/javascript";
+			//var attr = document.createAttribute('data-no-instant');
+			//scriptObj.setAttributeNode(attr);
+			var loaded;
+			if(typeof callback === 'function'){
+	        scriptObj.onload = scriptObj.onreadystatechange = function(){
+	            if(!loaded && (!scriptObj.readyState || /loaded|complete/.test(scriptObj.readyState))){
+	                scriptObj.onload = scriptObj.onreadystatechange = null;
+	                loaded = true;
+	                callback();
+	            }
+	        }
+	    }
+			document.getElementsByTagName("head")[0].appendChild(scriptObj);
 		}
 </script>
 
 <% if (is_home()){ %>
-    <% if (theme.baidu_site) { %> 
+    <% if (theme.baidu_site) { %>
         <meta name="baidu-site-verification" content="<%- theme.baidu_site %>" />
     <% } %>
-    <% if (theme.google_site) { %> 
+    <% if (theme.google_site) { %>
         <meta name="google-site-verification" content="<%- theme.google_site %>" />
     <% } %>
 <% } %>
@@ -58,38 +83,38 @@
 <%- open_graph({twitter_id: theme.twitter, google_plus: theme.google_plus, fb_admins: theme.fb_admins, fb_app_id: theme.fb_app_id}) %>
 
 <% if (theme.rss){ %>
-    <link rel="alternate" href="<%- theme.rss %>" title="<%= config.title %>" type="application/atom+xml">
+    <link rel="alternate" href="<%- theme.rss %>" title="<%= config.title %>" type="application/atom+xml" data-no-instant>
 <% } %>
 
 <% if (theme.animate){ %>
-    <link href="<%- theme.CDN.animate_css %>" rel="stylesheet">
+    <link href="<%- theme.CDN.animate_css %>" rel="stylesheet" data-no-instant>
 <% } %>
 
 <% if (theme.fancybox){ %>
-    <link href="<%- theme.CDN.fancybox_css %>" rel="stylesheet">
+    <link href="<%- theme.CDN.fancybox_css %>" rel="stylesheet" data-no-instant>
 <% } %>
 
 <% if (theme.progressBar.on) { %>
-	<script> 
-		paceOptions = { 
-			ajax: false, // disabled 
-			document: false, // disabled 
-			eventLag: false, // disabled 
+	<script data-no-instant>
+		paceOptions = {
+			ajax: false, // disabled
+			document: false, // disabled
+			eventLag: false, // disabled
 			restartOnRequestAfter: false,
 			restartOnPushState: false,
-			elements: { 
-				selectors: ['.body-wrap'] 
-			} 
+			elements: {
+				selectors: ['.body-wrap']
+			}
 		};
 	</script>
-    <script data-pace-options='{ "ajax": false }' src="<%- theme.CDN.pace_js %>"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/<%= theme.progressBar.color || 'blue'%>/pace-theme-<%= theme.progressBar.type || 'minimal'%>.css" rel="stylesheet">
+    <script data-pace-options='{ "ajax": false }' src="<%- theme.CDN.pace_js %>" data-no-instant></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/<%= theme.progressBar.color || 'blue'%>/pace-theme-<%= theme.progressBar.type || 'minimal'%>.css" rel="stylesheet" data-no-instant>
 <% } %>
 
 <%- css('css/style') %>
 
 <% if (is_home() && theme.animate){ %>
-    <style> .article { opacity: 0;} </style>
+    <style data-no-instant> .article { opacity: 0;} </style>
 <% } %>
 
 <link href="<%- theme.CDN.fontawesome %>" rel="stylesheet">
@@ -112,7 +137,7 @@ if ( is_archive() ) {
 <script src="<%- theme.CDN.jquery %>"></script>
 <script src="<%- theme.CDN.clipboard %>"></script>
 
-<script>
+<script data-no-instant>
     var yiliaConfig = {
         fancybox: <%=theme.fancybox%>,
         animate: <%=theme.animate%>,
@@ -128,33 +153,21 @@ if ( is_archive() ) {
 </script>
 
 <% if (theme.jquery_ui) { %>
-    <script>
+    <script data-no-instant>
         yiliaConfig.jquery_ui = [true, "<%- theme.CDN.jquery_ui_js %>", "<%- theme.CDN.jquery_ui_css %>"];
     </script>
 <% } else { %>
-    <script> yiliaConfig.jquery_ui = [false]; </script>
+    <script data-no-instant> yiliaConfig.jquery_ui = [false]; </script>
 <% } %>
 
 <% if (theme.root_url){ %>
-    <script> yiliaConfig.rootUrl = <%=theme.root_url%>; </script>
+    <script data-no-instant> yiliaConfig.rootUrl = <%=theme.root_url%>; </script>
 <% } else {%>
-    <script> yiliaConfig.rootUrl = "\/";</script>
+    <script data-no-instant> yiliaConfig.rootUrl = "\/";</script>
 <% } %>
 
 <% if (theme.share.on && theme.share.addthis){ %>
-    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=<%-theme.share.addthis_pubid%>"></script>
-<% } %>
-
-<% if (theme.baidu_tongji){ %>
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?<%=theme.baidu_tongji%>";
-            var s = document.getElementsByTagName("script")[0]; 
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=<%-theme.share.addthis_pubid%>" data-no-instant></script>
 <% } %>
 
 <%
@@ -162,26 +175,59 @@ if ( is_archive() ) {
 	var semantic_ui_js = url_for(theme.semantic_ui_js);
 
 	if (theme.use_cdn) {
-		semantic_ui_css = '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.19.3/css/semantic.min.css';
-		semantic_ui_js = '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.19.3/javascript/semantic.min.js';
+		semantic_ui_css = '//cdn.bootcss.com/semantic-ui/0.19.3/css/semantic.min.css';<!-- '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.19.3/css/semantic.min.css' -->
+		semantic_ui_js = '//cdn.bootcss.com/semantic-ui/0.19.3/javascript/semantic.min.js';<!-- '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.19.3/javascript/semantic.min.js' -->
 	}
 %>
-	<link rel="stylesheet" type="text/css" href="<%= semantic_ui_css %>">
-	<script src="<%= semantic_ui_js %>"></script>
-	
+
+<% if (is_home()){ %>
+	<link rel="stylesheet" type="text/css" href="<%= semantic_ui_css %>" data-no-instant>
+	<script src="<%= semantic_ui_js %>" data-no-instant></script>
+<% } %>
 	<!-- 右下角搜索 -->
-	<script><!-- 移动端不需要的样式不加载 -->
+<script><!-- 移动端不需要的样式不加载 -->
 		if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
-			document.write("<script src='/search/js/bootstrap3-typeahead.min.js'><\/script>"); 
+			document.write("<script src='/search/js/bootstrap3-typeahead.min.js' data-no-instant><\/script>");
 		} else {
-			document.write("<script src='/search/js/bootstrap3-typeahead.min-mobile.js'><\/script>"); 
+			document.write("<script src='/search/js/bootstrap3-typeahead.min-mobile.js' data-no-instant><\/script>");
 		}
 </script>
-	
-	<script src="/search/js/cb-search.js"></script>
 
-	<% if (config.prettify.enable){ %>
-		<!--prettify代码高亮主题css引入-->
-		<link href="/plugins/prettify/themes/<%= config.prettify.theme %>.css" rel="stylesheet">
-	<% } %>
+	<!-- <script src="/search/js/cb-search.js"></script> 已合并到after-footer.ejs-->
+	<!-- <script src="/plugins/js/jquery.lazyload.min.js"></script> -->
+	<script src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js" data-no-instant></script>
+	<!-- <% if (config.prettify.enable){ %> -->
+		<!--prettify代码高亮主题css引入。注：为了减少请求数，已将此css合并到special.css-->
+		<!--<link href="/plugins/prettify/themes/<%= config.prettify.theme %>.css" rel="stylesheet">-->
+	<!-- <% } %> -->
+
+	<script type="text/javascript">
+        //定义一个全局script的标记数组，用来标记是否某个script已经下载到本地
+        var scriptsArray = new Array();
+        $.cachedScript = function (url, options) {
+            //循环script标记数组
+            for (var s in scriptsArray) {
+                //console.log(scriptsArray[s]);
+                //如果某个数组已经下载到了本地
+                if (scriptsArray[s]==url) {
+
+                    return {  //则返回一个对象字面量，其中的done之所以叫做done是为了与下面$.ajax中的done相对应
+                        done: function (method) {
+                            if (typeof method == 'function'){  //如果传入参数为一个方法
+                                method();
+                            }
+                        }
+                    };
+                }
+            }
+            //这里是jquery官方提供类似getScript实现的方法，也就是说getScript其实也就是对ajax方法的一个拓展
+            options = $.extend(options || {}, {
+                dataType: "script",
+                url: url,
+                cache:true //其实现在这缓存加与不加没多大区别
+            });
+            scriptsArray.push(url); //将url地址放入script标记数组中
+            return $.ajax(options);
+        };
+    </script>
 </head>

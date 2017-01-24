@@ -1,13 +1,13 @@
 <footer id="footer">
     <div class="outer">
         <div id="footer-info" style="text-align:center;">
-		
-            <div class="footer-left">
-				<img src="/img/keep_trans.png" style="vertical-align:middle;" />
+
+            <div class="footer-left" style="vertical-align:middle;margin-top:2px">
+                <img src="" style="vertical-align:middle; opacity:0" height="24">
                 <i class="fa fa-copyright" style="vertical-align:middle;"></i>
                 <% if (theme.since && !isNaN(theme.since) && theme.since < date(new Date(), 'YYYY')) { %><%- theme.since%>-<% } %><%= date(new Date(), 'YYYY') %> <%= config.author || config.title %>
             </div>
-           
+
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					<% if(is_post()) {%>
@@ -18,10 +18,10 @@
 				</div>
             </div>
         </div>
-		
-        <% if (theme.visit_counter.on) { %>	
+
+        <% if (theme.visit_counter.on) { %>
             <div id="footerdiv" class="visit" style="text-align:center;">
-			<img src="/img/keep_trans.png" style="vertical-align:middle;">
+			        <img src="" style="vertical-align:middle; opacity:0" height="24">
                 <% if (theme.visit_counter.site_visit) { %>
                     <span id="busuanzi_container_site_pv" style="display:none; text-align:center;">
                         <span id="site-visit" class="hint  hint--top" data-hint="<%= __('visit_counter.site') %>" style="vertical-align:middle;"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
@@ -39,26 +39,25 @@
 						</span>
 					<% } %>
 				<% } else { %>
-					<span style="vertical-align:middle;">| </span><span class="hint  hint--top  hint--success" data-hint="以微薄之力，让世界更美" style="vertical-align:middle;"><a class="htmleaf-links" id="publicwelfare" href="../404.html" style="color:green;cursor:pointer">公益404</a>
+					<span style="vertical-align:middle;">| </span><span class="hint  hint--top  hint--success" data-hint="以微薄之力，让世界更美" style="vertical-align:middle;"><a class="htmleaf-links" id="publicwelfare" href="../404.html" style="color:green;cursor:pointer;margin-left:4px;">公益404</a>
 					</span>
-					<i class="fa fa-heart animated infinite pulse" style="color:red;"></i><!-- 红心-->
+					<i class="fa fa-heart animated infinite pulse" style="color:red;margin-left:2px;"></i><!-- 红心-->
 				<% } %>
             </div>
         <% } %>
     </div>
-	
+
 	<!-- 右下角的搜索 -->
 <div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
         opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
     <input type="text" class="cb-search-content" id="cb-search-content" style="width:50%;top:60px;left:300px;position:fixed; border-radius:50px; background-color:white; opacity:1 !important;" placeholder="请输入文章标题或标签" />
-    
+
 	<div id="cb-close-div" style="position: fixed; top: 16px; right: 16px;">
-        <span class="hint  hint--left" data-hint="按ESC键关闭搜索"><img src="/search/img/cb-close.png" id="cb-close-btn"/></span>
+        <span class="hint  hint--left" data-hint="按ESC键关闭搜索" id="id_span_search_close"></span>
     </div>
 </div>
 
 <div id="cb-search-div" style="position: fixed; right: 16px; bottom: 20px;">
-    <span class="hint  hint--left" data-hint="双击Ctrl键打开或关闭搜索"><img src="/search/img/cb-search.png" id="cb-search-btn"/></span>
+    <span class="hint  hint--left" data-hint="双击Ctrl键打开或关闭搜索" id="id_span_search_open"></span>
 </div>
 </footer>
-

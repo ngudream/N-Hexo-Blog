@@ -10,8 +10,13 @@
         var $commentBar = $("#comments aside.comment-bar");
         var load$hide = function(){
             $commentBar.find("a > i").toggle();
-            loadComment();
+            loadJS("http://ngudream.com/js/embed.js", function(){
+              if (typeof DUOSHUO !== 'undefined'){
+		              DUOSHUO.EmbedThread('.ds-thread');
+              }
+            })
             $commentBar.fadeOut(800);
+
         }
         $commentBar.click(function(){
             load$hide();

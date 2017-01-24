@@ -2,14 +2,13 @@
     <div class="copyright">
         <p><span><%= __('copyright_info.title') %>:</span><a href="<%- url_for(post.path) %>"><%= post.title %></a></p>
         <p><span><%= __('copyright_info.author') %>:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="<%= __('tooltip.back2home') %>"><%=theme.author%></a></p>
-        <p><span><%= __('copyright_info.date') %>:</span><%= post.date.format("YYYY-MM-DD, HH:mm:ss") %></p>
+        <p style="color: #696969;"><span><%= __('copyright_info.date') %>:</span><%= post.date.format("YYYY-MM-DD, HH:mm:ss") %></p>
         <!-- <p><span><%= __('copyright_info.updated') %>:</span><%= post.updated.format("YYYY-MM-DD, HH:mm:ss") %></p> -->
         <p>
             <span><%= __('copyright_info.url') %>:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="<%= post.title %>" href="<%- url_for(post.path) %>"><%= post.permalink %></a>
             <span class="copy-path hint  hint--right" data-clipboard-text="<%= __('copyright_info.from') %> <%= post.permalink %>　　<%= __('copyright_info.by') %> <%=theme.author%>" data-hint="<%= __('tooltip.copyPath') %>"><i class="fa fa-clipboard"></i></span>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
-        <p>
+        <p style="color: #696969;">
             <span><%= __('copyright_info.license') %>:</span><i class="fa fa-creative-commons"></i><a id="copyright_license" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target = "_blank" class="hint  hint--bottom" data-hint="中国大陆 (CC BY-NC-SA 3.0 CN)">"<%= __('copyright_info.cc') %>"</a> <%= __('copyright_info.notice') %>
         </p>
     </div>

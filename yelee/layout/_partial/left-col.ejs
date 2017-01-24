@@ -1,193 +1,214 @@
-<div class="overlay">
-<canvas id="matrix" width="300" height="180"></canvas>
+ <div class="overlay" id="id_code_rain_div" style="opacity:0.2">
+    <canvas id="matrix" width="300" height="180"></canvas>
 </div>
-<div class="intrude-less">
+<div class="intrude-less" data-no-instant>
     <header id="header" class="inner">
-        <a href="<%= config.root %>" class="profilepic">
+        <a id="id_avatar_a" href="<%= config.root %>" class="profilepic">
            <!-- <img src="<%- theme.root_url %><%=theme.avatar%>" class="animated zoomIn"> -->
-		   <% if (theme.animate){ %>
-			   <% 
-					var animationNames = [
-					"flash", "bounceIn", "fadeInRightBig", "rotateIn", "rollIn", "zoomIn", "bounceInDown",	
-					],
-					len = animationNames.length,
-					randomAnimationName = animationNames[Math.ceil(Math.random() * len) - 1];
-			   %>
-				<img src="<%- theme.root_url %><%=theme.avatar%>" class="animated <%= randomAnimationName %>">
-            <%}else{%>
-				<img src="<%- theme.root_url %><%=theme.avatar%>" class="js-avatar" style="width: 100%;height: 100%;opacity: 1;">
-            <%}%>
         </a>
-        <hgroup>
-          <h1 id="ngudream_name" class="header-author">
-				<a href="<%= config.root %>" ><span data-hover="专注于移动开发的不二"><%=theme.author%></span></a>
+        <hgroup id="id_hgroup_name">
+            <h1 id="ngudream_name" class="header-author"><!-- main.styl cl-effect-2 -->
+				<a href="<%= config.root %>"><span style="background-color:#fafafa !important" data-hover="专注于移动开发的不二"><%=theme.author%></span></a>
 		  </h1>
         </hgroup>
         <% if (theme.subtitle){ %>
-        <span class="header-subtitle" style="margin-left:-42px; margin-right:2px;">Coding Changes the </span><!--<%=theme.subtitle%>-->
-		<div class="rw-words rw-words-1" style="margin-left:2px;"><!-- 控制文字往下掉 -->
-				<span>World</span>
-				<span>Never</span>
-				<span>Give</span>
-				<span>Up</span>
-				<span>Dream</span>
-			</div>
-        <%}%>
+                <span id="id_span_change" class="header-subtitle" style="margin-left:-42px; margin-right:2px;">Coding Changes the </span>
+                <!--<%=theme.subtitle%>-->
 
-        <% if (theme.search.on){ %>
-		<form id="search-form"> <!-- 搜索框相关 -->
-			<div class="col-3" style="float:left">
-			<input type="text" id="local-search-input" name="q" results="0" placeholder="搜索...(◕ܫ◕) " class="effect-2" autocomplete="off" autocorrect="off"
-				style="padding-left:4px"/>
-			<span class="focus-border"></span><!-- 搜索框动画 -->
-			</div>
-			<div style="float:right;margin-top:13px;">
-				<i id="search-delete" class="button pill" onclick="resetSearch()" style="margin-left:-26px;">删除</i> <!-- 清空/重置搜索框 -->
-			</div>
-		</form>
-		<br/>
-		<br/>
-			<div id="local-search-result"></div> <!-- 搜索结果区 -->
-            <p class="no-result" style="font-size:0.8em;text-align:center;">空空如也...元芳，你怎么看？</p> <!-- 无匹配时显示，注意请在 CSS 中设置默认隐藏 <i class='fa fa-spinner fa-pulse'></i>-->
-        <%}%>
-
-
-        <%if(theme.tagcloud){%>
-            <div id="switch-btn" class="switch-btn">
-                <div class="icon">
-                    <div class="icon-ctn">
-                        <div class="icon-wrap icon-house" data-idx="0">
-                            <div class="birdhouse"></div>
-                            <div class="birdhouse_holes"></div>
-                        </div>
-                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
-                            <div class="ribbon"></div>
-                        </div>
-                        <%if(theme.friends && theme.friends.length != 0){%>
-                        <div class="icon-wrap icon-link hide" data-idx="2">
-                            <div class="loopback_l"></div>
-                            <div class="loopback_r"></div>
-                        </div>
-                        <%}%>
-                        <%if(theme.aboutme){%>
-                        <div class="icon-wrap icon-me hide" data-idx="3">
-                            <div class="user"></div>
-                            <div class="shoulder"></div>
-                        </div>
-                        <%}%>
-						<%if(theme.visitor){%>
-						<div class="icon-wrap icon-me hide" data-idx="4">
-							<div class="user"></div>
-							<div class="shoulder"></div>
-						</div>
-						<%}%>
-						<%if(true){%>
-						<div class="icon-wrap icon-me hide" data-idx="5">
-							<div class="user"></div>
-							<div class="wechat_left"></div>
-						</div>
-						<div class="icon-wrap icon-me hide" data-idx="6">
-							<div class="user"></div>
-							<div class="wechat_left"></div>
-						</div>
-						<%}%>
-                    </div>
-                    
+                <div id="id_normal_text_anim" class="rw-words rw-words-1" style="margin-left:2px;">
+                  <!-- 控制文字往下掉 -->
+                  <span>World</span>
+                  <span>Never</span>
+                  <span>Give</span>
+                  <span>Up</span>
+                  <span>Dream</span>
+                  <span style="font-size:20px;margin-top:-2px;"> 😜 😚</span>
                 </div>
-                <div class="tips-box hide"> <!-- 鸟屋 -->
-                    <div class="tips-arrow"></div>
-                    <ul class="tips-inner">
-                        <li><%= __('index.menu') %></li>
-                        <li><%= __('index.tags') %></li>
-                        <%if(theme.friends && theme.friends.length != 0){%>
-                        <li><%= __('index.friends') %></li>
-                        <%}%>
-                        <%if(theme.aboutme){%>
-                        <li><%= __('index.about') %></li>
-                        <%}%>
-						<%if(theme.visitor){%>
-						<li><%= __('index.visitor') %></li>
-						<%}%>
-                    </ul>
-                </div>
-            </div>
-        <%}%>
+            <% } %>
 
-        <div id="switch-area" class="switch-area">
-            <div class="switch-wrap">
-                <section class="switch-part switch-part1">
-                    <nav class="header-menu">
-                        <ul>
-                        <% for (var i in theme.menu){ %> <!-- 菜单 -->
-                            <li class="cl-effect-1"><a href="<%- theme.root_url %><%- url_for(theme.menu[i]) %>"><%= i %></a></li>
-                        <%}%>
-                        </ul>
-                    </nav>
-                    <nav class="header-nav">
-                        <ul class="social"> <!-- 社交 -->
-                            <% for (var i in theme.subnav){ %>
-								<% if(i == "WeChat") {%>
-									<span class="hint  hint--top" data-hint="微信"><a class="fa <%= i %>" href="javascript:void(0)"></a></span>
-								<%} else if (i == "QQ"){%>
-									<span class="hint  hint--top" data-hint="<%= i %>"><a class="fa <%= i %>" href="javascript:void(0)"></a></span>
-								<%} else {%>
-									<span class="hint  hint--top" data-hint="<%= i %>"><a class="fa <%= i %>" href="<%- url_for(theme.subnav[i]) %>"></a></span>
-								<% } %>
+                <% if (theme.search.on){ %>
+                    <form id="search-form">
+                        <!-- 搜索框相关 -->
+                        <div class="col-3" style="float:left">
+                            <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索...(◕ܫ◕)" class="effect-2" autocomplete="off" autocorrect="off" style="padding-left:4px" />
+                            <span class="focus-border"></span>
+                            <!-- 搜索框动画 -->
+                        </div>
+                        <div style="float:right;margin-top:13px;">
+                            <i id="search-delete" class="button pill" onclick="resetSearch()" style="margin-left:-26px;">删除</i>
+                            <!-- 清空/重置搜索框 -->
+                        </div>
+                    </form>
+                    <br/>
+                    <br/>
+                    <div id="local-search-result"></div>
+                    <!-- 搜索结果区 -->
+                    <p class="no-result" style="font-size:0.8em;text-align:center;">空空如也...元芳，你怎么看？</p>
+                    <!-- 无匹配时显示，注意请在 CSS 中设置默认隐藏 <i class='fa fa-spinner fa-pulse'></i>-->
+                    <%}%>
+
+                        <%if(theme.tagcloud){%>
+                            <div id="switch-btn" class="switch-btn">
+                                <div class="icon">
+                                    <div class="icon-ctn">
+                                        <div class="icon-wrap icon-house" data-idx="0">
+                                            <div class="birdhouse"></div>
+                                            <div class="birdhouse_holes"></div>
+                                        </div>
+                                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                                            <div class="ribbon"></div>
+                                        </div>
+                                        <%if(theme.friends && theme.friends.length != 0){%>
+                                            <div class="icon-wrap icon-link hide" data-idx="2">
+                                                <div class="loopback_l"></div>
+                                                <div class="loopback_r"></div>
+                                            </div>
+                                            <%}%>
+                                                <%if(theme.aboutme){%>
+                                                    <div class="icon-wrap icon-me hide" data-idx="3">
+                                                        <div class="user"></div>
+                                                        <div class="shoulder"></div>
+                                                    </div>
+                                                    <%}%>
+                                                        <%if(theme.visitor){%>
+                                                            <div class="icon-wrap icon-me hide" data-idx="4">
+                                                                <div class="user"></div>
+                                                                <div class="shoulder"></div>
+                                                            </div>
+                                                            <%}%>
+                                                                <%if(true){%>
+                                                                    <div class="icon-wrap icon-me hide" data-idx="5">
+                                                                        <div class="user"></div>
+                                                                        <div class="wechat_left"></div>
+                                                                    </div>
+                                                                    <div class="icon-wrap icon-me hide" data-idx="6">
+                                                                        <div class="user"></div>
+                                                                        <div class="wechat_left"></div>
+                                                                    </div>
+                                                                    <%}%>
+                                    </div>
+
+                                </div>
+
+                                <div class="tips-box hide">
+                                    <!-- 鸟屋 -->
+                                    <div class="tips-arrow"></div>
+                                    <ul class="tips-inner">
+                                        <li>
+                                            <%= __('index.menu') %>
+                                        </li>
+                                        <li>
+                                            <%= __('index.tags') %>
+                                        </li>
+                                        <%if(theme.friends && theme.friends.length != 0){%>
+                                            <li>
+                                                <%= __('index.friends') %>
+                                            </li>
+                                            <%}%>
+                                                <%if(theme.aboutme){%>
+                                                    <li>
+                                                        <%= __('index.about') %>
+                                                    </li>
+                                                    <%}%>
+                                                        <%if(theme.visitor){%>
+                                                            <li>
+                                                                <%= __('index.visitor') %>
+                                                            </li>
+                                                            <%}%>
+                                    </ul>
+                                </div>
+                            </div>
                             <%}%>
-                        </ul>
-                    </nav>
-                </section>
-                
-                <%if(theme.tagcloud){%>
-					<section class="switch-part switch-part2">
-						<div class="widget tagcloud" id="js-tagcloud">
-							<%- list_tags({show_count: false}) %>
-						</div>
-					</section>
-                <%}%>
-                
-                <%if(theme.friends && theme.friends.length != 0){%>
-					<section class="switch-part switch-part3">
-						<div id="js-friends">
-						<% for (var i in theme.friends){ %>
-						  <a class="main-nav-link switch-friends-link" href="<%- url_for(theme.friends[i]) %>"><%= i %></a>
-						<% } %>
-						<div style="margin-top:50px;">
-							<span>感恩一路有你们的陪伴与帮助！</span>
-						</div>
-						</div>
-					</section>
-                <%}%>
 
-                <%if(theme.aboutme){%>
-                <%if(!theme.friends){%>
-					<section class="switch-part switch-part3">
-                <%}else{%>
-					<section class="switch-part switch-part4">
-                <%}%>
-						<div id="js-aboutme"><%=theme.aboutme%></div>
-						<div style="text-align:center;" id="bee_div"></div>
-					</section>
-                <%}%>
-				<%if(theme.visitor){%> <!-- 最近访客http://yeshaoting.cn/article/hexo/yelee%E4%B8%BB%E9%A2%98%E6%9C%80%E8%BF%91%E8%AE%BF%E5%AE%A2%E6%8C%82%E4%BB%B6/#more -->
-					<section class="switch-part switch-part5">
-						<div class="widget visitor" id="js-visitor">
-							<ul class="ds-recent-visitors" data-num-items="28" data-avatar-size="50" id="ds-recent-visitors"></ul>
-						</div>
-					</section>
-				<%}%>
-				<%if(true){%>
-					<section class="switch-part switch-part6">
-						<div style="text-align:center;" id="qq_div">
-						</div>
-					</section>
-					
-					<section class="switch-part switch-part7" id="wechat_div">
-						<div style="text-align:center;"></div>
-					</section>
-				<%}%>
-				
-            </div>
-        </div>
-    </header>   
+                                <div id="switch-area" class="switch-area">
+                                    <div class="switch-wrap">
+                                        <section class="switch-part switch-part1">
+                                            <nav class="header-menu">
+                                                <ul id="menu_ul">
+                                                    <% for (var i in theme.menu){ %>
+                                                        <!-- 菜单 -->
+                                                        <li class="cl-effect-1">
+                                                            <a href="<%- theme.root_url %><%- url_for(theme.menu[i]) %>">
+                                                                <%= i %>
+                                                            </a>
+                                                        </li>
+                                                        <%}%>
+                                                </ul>
+                                            </nav>
+                                            <nav class="header-nav">
+                                                <ul class="social">
+                                                    <!-- 社交 -->
+                                                    <% for (var i in theme.subnav){ %>
+                                                        <% if(i == "WeChat") {%>
+                                                            <span class="hint  hint--top" data-hint="微信"><a class="fa <%= i %>" href="javascript:void(0)" style="margin-left:3px;"></a></span>
+                                                            <%} else if (i == "QQ"){%>
+                                                                <span class="hint  hint--top" data-hint="<%= i %>"><a class="fa <%= i %>" href="javascript:void(0)" style="margin-left:3px;"></a></span>
+                                                                <%} else {%>
+                                                                      <% if(i == "Email"){ %>
+                                                                            <span class="hint  hint--top" data-hint="<%= i %>"><a class="fa <%= i %>" href="<%- url_for(theme.subnav[i]) %>"></a></span>
+                                                                      <% } else { %>
+                                                                            <span class="hint  hint--top" data-hint="<%= i %>"><a class="fa <%= i %>" href="<%- url_for(theme.subnav[i]) %>" style="margin-left:3px;"></a></span>
+                                                                      <% } %>
+                                                                    <% } %>
+                                                                        <%}%>
+                                                </ul>
+                                            </nav>
+                                        </section>
+
+                                        <%if(theme.tagcloud){%>
+                                            <section class="switch-part switch-part2">
+                                                <div class="widget tagcloud" id="js-tagcloud">
+                                                    <%- list_tags({show_count: false}) %>
+                                                </div>
+                                            </section>
+                                            <%}%>
+
+                                                <%if(theme.friends && theme.friends.length != 0){%>
+                                                    <section class="switch-part switch-part3">
+                                                        <div id="js-friends">
+                                                            <% for (var i in theme.friends){ %>
+                                                                <a class="main-nav-link switch-friends-link" href="<%- url_for(theme.friends[i]) %>">
+                                                                    <%= i %>
+                                                                </a>
+                                                                <% } %>
+                                                                    <div style="margin-top:50px;">
+                                                                        <span>感恩一路有你们的陪伴与帮助！</span>
+                                                                    </div>
+                                                        </div>
+                                                    </section>
+                                                    <%}%>
+
+                                                        <%if(theme.aboutme){%>
+                                                            <%if(!theme.friends){%>
+                                                                <section class="switch-part switch-part3">
+                                                                    <%}else{%>
+                                                                        <section class="switch-part switch-part4">
+                                                                            <%}%>
+                                                                                <div id="js-aboutme" style="line-height:1.4rem !important">
+                                                                                    <%=theme.aboutme%>
+                                                                                </div>
+                                                                                <div style="text-align:center;" id="bee_div"></div>
+                                                                        </section>
+                                                                        <%}%>
+                                                                            <%if(theme.visitor){%>
+                                                                                <!-- 最近访客http://yeshaoting.cn/article/hexo/yelee%E4%B8%BB%E9%A2%98%E6%9C%80%E8%BF%91%E8%AE%BF%E5%AE%A2%E6%8C%82%E4%BB%B6/#more -->
+                                                                                <section class="switch-part switch-part5">
+                                                                                  <div class="widget visitor" id="js-visitor">
+                                                                                  </div>
+                                                                                </section>
+                                                                                <%}%>
+                                                                                    <%if(true){%>
+                                                                                        <section class="switch-part switch-part6">
+                                                                                            <div style="text-align:center;" id="qq_div">
+                                                                                            </div>
+                                                                                        </section>
+
+                                                                                        <section class="switch-part switch-part7" id="wechat_div">
+                                                                                            <div style="text-align:center;"></div>
+                                                                                        </section>
+                                                                                        <%}%>
+
+                                    </div>
+                                </div>
+    </header>
 </div>

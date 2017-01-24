@@ -71,7 +71,7 @@
     }
 
     @media screen and (max-width:1040px) {
-        
+
     }@media screen and (max-width:800px) {
         @import "_partial/mobile"
     }
@@ -101,7 +101,7 @@
         margin: 0 auto;
         position: relative;
         overflow: hidden;
-        background: #88acdb;
+        background: rgba(136, 172, 219, 0.9);
         -webkit-transition: all 0.2s ease-in;
         display: -webkit-box;
         -webkit-box-orient: horizontal;
@@ -351,7 +351,7 @@
         -webkit-box-align: center;
         li{
             cursor: default;
-			
+
             a{
                 font-size: (14/16)rem;
                 min-width: left-col-width;
@@ -462,7 +462,7 @@
             color: rgba(255, 255, 255, .8);
         }
         &:hover {
-            background: rgba(147, 181, 224, .3) !important; 
+            background: rgba(147, 181, 224, .3) !important;
             .fa {
                 color: white;
             }
@@ -491,7 +491,7 @@
     -webkit-appearance: none;
     &:hover {
         color: #88acdb;
-        opacity: 1; 
+        opacity: 1;
     }
 }
 
@@ -537,7 +537,7 @@ if hexo-config("github_widget")
     .article-entry .github-widget
         h3::after
             content none
-        .github-box 
+        .github-box
             font-size (13/16)rem
             .github-box-title
                 h3
@@ -561,14 +561,14 @@ if hexo-config("jquery_ui")
 
     body .ui-tooltip
         border 1px solid white
-        
+
 
 if hexo-config("progressBar.on") && hexo-config("progressBar.type") == "minimal"
         bar-color = hexo-config("progressBar.color")
         if bar-color == "blue"
             .pace .pace-progress
                 background #77b6ff
-                box-shadow 0 0 10px rgba(@background, .7) 
+                box-shadow 0 0 10px rgba(@background, .7)
 
 .article-entry ul > li,
 .share,
@@ -644,7 +644,7 @@ img.emoji {
 	position: relative;
 	display: inline-block;
 	padding: 0 14px;
-	background: #fff;
+	background: #fafafa;
 	-webkit-transition: -webkit-transform 0.3s;
 	-moz-transition: -moz-transform 0.3s;
 	transition: transform 0.3s;
@@ -662,7 +662,7 @@ img.emoji {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: #fff;
+	background: #fafafa;
 	font-size: 0.5rem;
 	content: attr(data-hover);
 	-webkit-transition: background 0.3s;
@@ -685,7 +685,7 @@ img.emoji {
 
 .csstransforms3d .cl-effect-2 a:hover span::before,
 .csstransforms3d .cl-effect-2 a:focus span::before {
-	background: #fff;	
+	background: #fff;
 }
 
 .link {
