@@ -5,9 +5,9 @@
       </div>
     <div class="intrude-less">
         <header id="header" class="inner">
-            <a href="<%= config.root %>" class="profilepic">
+            <a id="id_avatar_a_mobile" href="<%= config.root %>" class="profilepic">
                 <!-- <img src="<%- theme.root_url %><%=theme.avatar%>" class="animated rotateIn" style="-vendor-animation-duration: 3s;-vendor-animation-delay: 2s;-vendor-animation-iteration-count: infinite;"> -->
-				<img src="<%- theme.root_url %><%=theme.avatar%>" >
+				<!--<img src="<%- theme.root_url %><%=theme.avatar%>" > -->
             </a>
             <hgroup>
               <h1 class="header-author"><a href="<%= config.root %>" title="回到主页"><%=theme.author%></a></h1>
@@ -36,7 +36,7 @@
                             <%}%>
                         </ul>
             </nav>
-        </header>                
+        </header>
     </div>
     <link class="menu-list" tags="<%= __('index.tags') %>" friends="<%= __('index.friends') %>" about="<%= __('index.about') %>"/>
 </nav>

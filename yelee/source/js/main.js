@@ -85,7 +85,7 @@ require([], function (){
 
     // Animate on Homepage
     if(!!yiliaConfig.animate) {
-		
+
         if(!!yiliaConfig.isHome) {
             require([yiliaConfig.scrollreveal], function (ScrollReveal) {
                 var animationNames = [
@@ -94,9 +94,9 @@ require([], function (){
                 ],
                 len = animationNames.length;
 				var randomAnimationName = "fadeInUp";//移动端中有从下往上的动画
-				if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){//非移动端再添加多点动画
-					randomAnimationName = animationNames[Math.ceil(Math.random() * len) - 1];
-				}
+				// if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){//非移动端再添加多点动画
+				// 	randomAnimationName = animationNames[Math.ceil(Math.random() * len) - 1];
+				// }
 
                 // Fallback (CSS3 keyframe, requestAnimationFrame)
 				 // ie9 不支持css3 keyframe动画, safari不支持requestAnimationFrame, 不使用随机动画，切回原来的动画
@@ -149,47 +149,6 @@ require([], function (){
         require(['toc'], function(){ })
     }
 
-    // Random Color 边栏顶部随机颜色
-    var colorList = ["#6da336", "#ff945c", "#66CC66", "#99CC99", "#CC6666", "#76becc", "#c99979", "#918597", "#4d4d4d"];
-    var id = Math.ceil(Math.random()*(colorList.length-1));
-    // PC
-    $("#container .left-col .overlay").css({"background-color": colorList[id],"opacity": .5});
-    // Mobile
-    $("#container #mobile-nav .overlay").css({"background-color": colorList[id],"opacity": .7});
-	
-	$(window).load(function() {
-		if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
-			// 代码雨
-			var width = matrix.width;
-			var height = matrix.height;
-			var letters = Array(256).join(1).split('');
-			var colorBGList = ["rgba(109,163,54,0.05)", "rgba(255,148,92, 0.05)", "rgba(102,204,102,0.05)", "rgba(153,204,153,0.05)", "rgba(204,102,102,0.05)", "rgba(118,190,204,0.05)", "rgba(201,153,121,0.05)", "rgba(145,133,151,0.05)", "rgba(77,77,77,0.05)"];
-			var colorLetterList = ["#ffffff", "#000000", "#000000", "#000080", "#000000", "#FFFF00", "#000000", "#0F0", "#0F0"]
-			var draw = function () {
-				matrix.getContext('2d').globalAlpha = 1.0; 
-				matrix.getContext('2d').fillStyle = colorBGList[id];
-				matrix.getContext('2d').fillRect(0, 0, width, height);
-				matrix.getContext('2d').fillStyle = colorLetterList[id];
-				matrix.getContext('2d').font = "10pt Calibri";
-				letters.map(function (y_pos, index) {
-					text = String.fromCharCode(/*3e4*/ 65 + Math.random() * 33);
-					x_pos = index * 10;
-					matrix.getContext('2d').fillText(text, x_pos, y_pos);
-					letters[index] = (y_pos > 180 + Math.random() * 1e4) ? 0 : y_pos + 10;
-				});
-			};
-			var timer = setInterval(draw, 60);
-			
-			window.onfocus = function() {//获取焦点时开始
-				clearInterval(timer); 
-				timer = setInterval(draw, 60);//定时器
-			}
-			window.onblur = function() {//失去焦点时停止
-				clearInterval(timer); 
-			}
-		}
-	});
-
 	//设置左边栏宽度
 	//var leftcol = document.getElementsByClassName("left-col")[0];
 	//if(totalwidth >= 100){
@@ -197,7 +156,7 @@ require([], function (){
 	//} else if(totalwidth >= 1550 && totalwidth < 1900){
 	//	leftcol.style.width = "350px";
 	//}
-	
+
     // Table
     $("table").wrap("<div class='table-area'></div>");
 
@@ -207,16 +166,6 @@ require([], function (){
             $("#scroll > a:nth-child(2)").hide();
         }
     })
-
-    // Hide Labels
-    if(yiliaConfig.isArchive || yiliaConfig.isTag || yiliaConfig.isCategory) {
-        $(document).ready(function() {
-            $("#footer").after("<button class='hide-labels fa fa-eye animated infinite pulse' style='margin-left:10px;margin-top:10px;'></button>");
-            $(".hide-labels").click(function() {
-                $(".article-info").toggle(200);
-            })
-        })
-    }
 
     // Task lists in markdown
     $('ul > li').each(function() {
@@ -252,4 +201,3 @@ require([], function (){
     })
 
 })
-

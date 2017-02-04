@@ -11,9 +11,9 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					<% if(is_post()) {%>
-						<span style="margin-left:20px;vertical-align:middle;">本文字数：<%= wordcount(page.content) %></span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：<%= wordcount(page.content) %></span>
 					<%} else { %>
-						<span style="margin-left:20px;vertical-align:middle;">总字数：<%= totalcount(site) %></span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">总字数：<%= totalcount(site) %></span>
 					<% } %>
 				</div>
             </div>
@@ -30,16 +30,16 @@
                 <% } %>
 				<% if(is_post()) {%>
 					<% if (theme.visit_counter.site_visit && theme.visit_counter.page_visit){ %>
-						<span id="divider_span" style="vertical-align:middle;">| </span>
+						<span id="divider_span" style="vertical-align:middle;">|&thinsp;</span>
 					<% } %>
 					<% if (theme.visit_counter.page_visit) { %>
 						<span id="busuanzi_container_page_pv" style="display:none;text-align:center;">
-							<span id="page-visit" class="hint  hint--top  hint--info" data-hint="<%= __('visit_counter.page') %>" style="vertical-align:middle;"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span><span>°C</span>
+							<span id="page-visit" class="hint  hint--top  hint--info" data-hint="<%= __('visit_counter.page') %>" style="vertical-align:middle;"><i class="fa fa-eye animated infinite pulse" aria-hidden="true" style="margin-left:-2px;"></i><span id="busuanzi_value_page_pv"></span><span>°C</span>
 							</span>
 						</span>
 					<% } %>
 				<% } else { %>
-					<span style="vertical-align:middle;">| </span><span class="hint  hint--top  hint--success" data-hint="以微薄之力，让世界更美" style="vertical-align:middle;"><a class="htmleaf-links" id="publicwelfare" href="../404.html" style="color:green;cursor:pointer;margin-left:4px;">公益404</a>
+					<span style="vertical-align:middle;">|&thinsp;</span><span class="hint  hint--top  hint--success" data-hint="以微薄之力，让世界更美" style="vertical-align:middle;" data-no-instant><a class="htmleaf-links" id="publicwelfare" href="../404.html" style="color:green;cursor:pointer;">公益404</a>
 					</span>
 					<i class="fa fa-heart animated infinite pulse" style="color:red;margin-left:2px;"></i><!-- 红心-->
 				<% } %>

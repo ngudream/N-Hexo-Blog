@@ -42,13 +42,18 @@
 			<%- partial('post/title', {class_name: 'article-title'}) %>
 		</span>
 	</div>
-	<div onclick="window.open('<%- url_for(post.path) %>','_self')" style="margin-top:20px; line-height: 1.65em;cursor:pointer">
-          <% if (post.description){ %>
-              <%- post.description %>
-          <% } else { %>
-              <%- post.excerpt %>
-          <% } %>
+  <% if (post.description){ %>
+  	<div id="id_description_div" style="margin-top:20px; line-height: 1.65em;cursor:pointer">
+        <a href="<%- url_for(post.path) %>" style="color:#333">
+            <%- post.description %>
+        </a>
     </div>
+  <% } else { %>
+    <div onclick="window.open('<%- url_for(post.path) %>','_self')" id="id_description_div" style="margin-top:20px; line-height: 1.65em;cursor:pointer">
+        <%- post.excerpt %>
+    </div>
+  <% } %>
+
     <% if (index){ %>
     <div class="article-info article-info-index">
       <%if(post.top){%>

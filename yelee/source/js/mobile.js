@@ -79,7 +79,7 @@ define([], function(){
     //第四步 -- 绑定 DOM 事件
     var bindDOM = function(){
         var scaleW = scaleW;
-        
+
         //滑动隐藏
         document.getElementById("viewer-box").addEventListener("webkitTransitionEnd", function(){
 
@@ -88,7 +88,7 @@ define([], function(){
                 _isShow = true;
             }else{
             }
-            
+
         }, false);
 
         //点击展示和隐藏
