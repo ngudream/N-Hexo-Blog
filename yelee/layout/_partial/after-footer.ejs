@@ -88,6 +88,14 @@
       //return yiliaConfig.isCategory;
     }
 
+    function is_home(){
+      var url = window.location.pathname;
+      if(url == '/'){
+        return true;
+      }
+      return false;
+    }
+
     var slide = function(idx) {
         // 修复IE10+切换无效的bug
         var $wrap = $(".switch-wrap"),
@@ -205,6 +213,79 @@
         }
     }
 
+    // 异步加载css
+    function loadCss (cssUrl, callback) {
+      var elem, bl,
+          isExecuted = false; // 防止在ie9中，callback执行两次
+
+      if ( cssUrl == null ) {
+          return String(cssUrl);
+      }
+      elem = document.createElement('link'),
+      elem.rel = 'stylesheet';
+      if ( typeof callback === 'function' )  {
+          bl = true;
+      }
+
+      // for ie
+      function handle() {
+          if ( elem.readyState === 'loaded' || elem.readyState === 'complete' ) {
+              if (bl && !isExecuted) {
+                  callback();
+                  isExecuted = true;
+              }
+              elem.onreadystatechange = null;
+          }
+      }
+      elem.onreadystatechange = handle;
+
+      // for 非ie
+      if (bl && !isExecuted) {
+          elem.onload = callback;
+          isExecuted = true;
+      }
+
+      elem.href = cssUrl;
+      document.getElementsByTagName('head')[0].appendChild(elem);
+    }
+
+    //异步加载js
+    function loadScript(scriptUrl, callback) {
+      var elem, bl,
+          isExecuted = false; // 防止在ie9中，callback执行两次
+
+      if (scriptUrl == null) {
+          return String(fn);
+      }
+      elem = document.createElement('script');
+      if ( typeof callback === 'function' )  {
+          bl = true;
+      }
+
+      // for ie
+      function handle(){
+          var status = elem.readyState;
+          if (status === 'loaded' || status === 'complete') {
+              if (bl && !isExecuted) {
+                  callback();
+                  isExecuted = true;
+              }
+              elem.onreadystatechange = null;
+          }
+      }
+      elem.onreadystatechange = handle;
+
+      // for 非ie
+      if (bl && !isExecuted) {
+          elem.onload = callback;
+          isExecuted = true;
+      }
+
+      elem.src = scriptUrl;
+      document.getElementsByTagName('head')[0].appendChild(elem);
+    }
+
+    //instantclick回调
     var afterChange = function (isChange) {
       var isPostPage = null;
       if(isPostPage == null){
@@ -224,6 +305,13 @@
         clickTocTitle();
         TocNoWarp(yiliaConfig.toc[2]);
         $(".article").css("opacity", "1.0");//结束后要将文章显示
+      } else if(is_home() && !isChange){
+        loadCss("//cdn.bootcss.com/semantic-ui/0.19.3/css/semantic.min.css", function(){
+          jQuery.getScript("//cdn.bootcss.com/semantic-ui/0.19.3/javascript/semantic.min.js").done(function(){
+            $(".article").removeClass("animated");
+            $(".article").css("opacity", "1.0");//结束后要将文章显示
+          });
+        });
       }
       if(is_archive()){
         $("#id_archives").css("opacity", "1.0");
@@ -1235,7 +1323,7 @@
               var curDate = new Date();
               var date = curDate.getDate();
               var path = '/img/daily_pic/' + (date % 83) + '.png';
-              var avatarIndex = Math.ceil(Math.random()*31);
+              var avatarIndex = Math.ceil(Math.random()*30);
               var newAvatar = '/img/avatar/' + avatarIndex + '.png';
               //console.log(path);
               var year_div = "<div align=center id='left_show_div' ><img src=" + path + " id='2017_year' style='cursor:pointer;'/></div>";
@@ -1389,7 +1477,6 @@
 			jQuery.getScript("//cdn.bootcss.com/instantclick/3.0.1/instantclick.min.js")
 				.done(function() {
 					InstantClick.on('change', function (isInitialLoad) {
-            //console.log(isInitialLoad);
 						if (isInitialLoad === false) {
               afterChange(isInitialLoad);
               if (typeof MathJax !== 'undefined'){ // support MathJax
