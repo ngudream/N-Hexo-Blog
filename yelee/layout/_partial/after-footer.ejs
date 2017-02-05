@@ -312,6 +312,16 @@
             $(".article").css("opacity", "1.0");//结束后要将文章显示
           });
         });
+      } else {//暂时解决在分类标签页打开其它页面后，返回分类标签页加载页面出错的问题
+        var url = window.location.pathname;
+        if(!isChange){
+          if(url == "/tags/"){
+            window.location.reload();
+            return;
+          } else if(url.startWith("/page/")){
+            $(".article").css("opacity", "1.0");//结束后要将文章显示
+          }
+        }
       }
       if(is_archive()){
         $("#id_archives").css("opacity", "1.0");
@@ -1477,6 +1487,7 @@
 			jQuery.getScript("//cdn.bootcss.com/instantclick/3.0.1/instantclick.min.js")
 				.done(function() {
 					InstantClick.on('change', function (isInitialLoad) {
+            //console.log(isInitialLoad);
 						if (isInitialLoad === false) {
               afterChange(isInitialLoad);
               if (typeof MathJax !== 'undefined'){ // support MathJax
