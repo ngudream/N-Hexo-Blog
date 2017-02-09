@@ -710,29 +710,36 @@
         }
     }
 
+    //给标题加上序号
     var setTitleSerialNum = function () {
-        //给标题加上序号
         if(is_post()){
-      			var h2s = document.getElementsByTagName("h2");
-      			for (var i = 0; i < h2s.length; i++) {//控制h2标题的间隔
-      				var h2 = h2s[i];
-      				h2.style.marginTop = "0.5em";
-      				h2.style.marginBottom = "0.3em";
-      			}
+            var existNumber = null;
+      			$("h2").each(function(){
+              if($(this).attr("exist-number") != undefined) {
+                existNumber = true;
+                return false;
+              }
+              $(this).css("margin-top", "0.5em");
+              $(this).css("margin-bottom", "0.3em");
+              var attr = $(this).attr("exist-number");
+              if(null == attr || undefined == attr){
+                $(this).attr("exist-number", true);
+              }
+            });
+            //已经设置过序号，将直接返回
+            if(existNumber){
+              return;
+            }
 
-      			var h3s = document.getElementsByTagName("h3");
-      			for (var i = 0; i < h3s.length; i++) {//控制h3标题的间隔
-      				var h3 = h3s[i];
-      				h3.style.marginTop = "0.3em";
-      				h3.style.marginBottom = "0.2em";
-      			}
+            $("h3").each(function(){//控制h3标题的间隔
+              $(this).css("margin-top", "0.3em");
+              $(this).css("margin-bottom", "0.2em");
+            });
 
-      			var h4s = document.getElementsByTagName("h4");
-      			for (var i = 0; i < h4s.length; i++) {//控制h4标题的间隔
-      				var h4 = h4s[i];
-      				h4.style.marginTop = "0.15em";
-      				h4.style.marginBottom = "0.15em";
-      			}
+            $("h4").each(function(){//控制h4标题的间隔
+              $(this).css("margin-top", "0.15em");
+              $(this).css("margin-bottom", "0.15em");
+            });
 
       			var $article = $(".article-entry");
       			var count = [0, 0, 0, 0, 0, 0];
@@ -786,12 +793,6 @@
       				listStr += "  ";
       				t.html(listStr + t.html());
       			});
-      			if (navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)) {
-      				<!-- 移动端不显示提示 -->
-      				$("#copyright_author").attr("class", "");
-      				$("#copyright_url").attr("class", "");
-      				$("#copyright_license").attr("class", "");
-      			}
         } else {
             //if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)) {
             //	var heartspan = "<span class='htmleaf-links'><i class='heart' id='like3' rel='like'></i></span>";
@@ -820,6 +821,7 @@
         }
     }
 
+    //代码高亮
     var setHightLigth = function () {
         <!-- prettify代码高亮脚本引入 http://jumpbyte.cn/2016/07/02/use-and-install-prettify/-->
         if (is_post()){
@@ -884,31 +886,37 @@
         	}
         	console.log("screen.height = " + screen.height + ", screen.width = " + screen.width);
         } else {
+          if (is_post()) {
+            <!-- 移动端不显示提示 -->
+            $("#copyright_author").attr("class", "");
+            $("#copyright_url").attr("class", "");
+            $("#copyright_license").attr("class", "");
+          }
           $("#id_wordcount_span").css("margin-left", "");
           $(".body-wrap").css("margin-bottom", "110px");//移动端页面底部距离大一点
-          if (totalwidth > 900) {
-            $("<link>")
-                  .attr({
-                    rel: "stylesheet",
-                    type: "text/css",
-                    href: "/plugins/hint/hint.min.css"
-                  })
-                  .appendTo("head");
-            $("<link>")
-                  .attr({
-                      rel: "stylesheet",
-                      type: "text/css",
-                      href: "/plugins/font/style3.css"
-                  })
-                  .appendTo("head");
-            $("<link>")
-                  .attr({
-                      rel: "stylesheet",
-                      type: "text/css",
-                      href: "/plugins/heart/style.css"
-                  })
-                  .appendTo("head");
-            }
+          // if (totalwidth > 900) {//已合并到special.css
+          //   $("<link>")
+          //         .attr({
+          //           rel: "stylesheet",
+          //           type: "text/css",
+          //           href: "/plugins/hint/hint.min.css"
+          //         })
+          //         .appendTo("head");
+          //   $("<link>")
+          //         .attr({
+          //             rel: "stylesheet",
+          //             type: "text/css",
+          //             href: "/plugins/font/style3.css"
+          //         })
+          //         .appendTo("head");
+          //   $("<link>")
+          //         .attr({
+          //             rel: "stylesheet",
+          //             type: "text/css",
+          //             href: "/plugins/heart/style.css"
+          //         })
+          //         .appendTo("head");
+          //   }
                     //左边栏缩小
             if (totalwidth > 900 && totalwidth < 1200) {
                 $(".left-col").css("width", "250px");
@@ -1330,52 +1338,57 @@
           var totalHeight = screen.height;
           if (!is_post()) {
             if(totalHeight >= 700){//左边栏足够高才显示图片
-              var curDate = new Date();
-              var date = curDate.getDate();
-              var path = '/img/daily_pic/' + (date % 83) + '.png';
-              var avatarIndex = Math.ceil(Math.random()*30);
-              var newAvatar = '/img/avatar/' + avatarIndex + '.png';
-              //console.log(path);
-              var year_div = "<div align=center id='left_show_div' ><img src=" + path + " id='2017_year' style='cursor:pointer;'/></div>";
-              $("#left_col_div").append(year_div);
-              if(totalHeight >= 1000){
-                $("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
-              } else if(totalHeight >= 700){
-                $("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
-                var clickCount = 0;
-                $("#id_span_change").css("cursor", "pointer").click(function(){
-                  if((clickCount % 2) == 0){
-                    $("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
-                  } else {
-                    $("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
-                  }
-                  clickCount++;
-                });
-                var avatarOut = false;
-                $("#id_avatar_a").mouseenter(function(){
-                  if(!avatarOut){
-                    avatarOut = true;
-                    $("#blog_avatar").attr("src", newAvatar).attr("class", "animated rotateInDownLeft").css("background", "#fafafa").css("border-radius","50px");
-                  }
-                });
+              if($("#left_show_div").length <= 0){
+                var curDate = new Date();
+                var date = curDate.getDate();
+                var time = Date.parse(new Date());
+                var lastTime = Date.parse("2017-02-01");
+                var day = parseInt((time -lastTime)/(1000*60*60*24));
+                var path = '/img/daily_pic/' + (day % 83) + '.png';
+                var avatarIndex = Math.ceil(Math.random()*30);
+                var newAvatar = '/img/avatar/' + avatarIndex + '.png';
+                //console.log(path);
+                var year_div = "<div align=center id='left_show_div' ><img src=" + path + " id='2017_year' style='cursor:pointer;'/></div>";
+                $("#left_col_div").append(year_div);
+                if(totalHeight >= 1000){
+                  $("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
+                } else if(totalHeight >= 700){
+                  $("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
+                  var clickCount = 0;
+                  $("#id_span_change").css("cursor", "pointer").click(function(){
+                    if((clickCount % 2) == 0){
+                      $("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
+                    } else {
+                      $("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
+                    }
+                    clickCount++;
+                  });
+                  var avatarOut = false;
+                  $("#id_avatar_a").mouseenter(function(){
+                    if(!avatarOut){
+                      avatarOut = true;
+                      $("#blog_avatar").attr("src", newAvatar).attr("class", "animated rotateInDownLeft").css("background", "#fafafa").css("border-radius","50px");
+                    }
+                  });
 
-                $("#id_avatar_a").mouseleave(function(){
-                  if(avatarOut){
-                    avatarOut = false;
-                    $("#blog_avatar").attr("src", avatarPath).attr("class", "animated rotateInDownRight");
-                  }
+                  $("#id_avatar_a").mouseleave(function(){
+                    if(avatarOut){
+                      avatarOut = false;
+                      $("#blog_avatar").attr("src", avatarPath).attr("class", "animated rotateInDownRight");
+                    }
+                  });
+                }
+
+                $("#2017_year").click(function() {
+                  //$(this).remove();
+                  $(this).css("opacity", 0);
+                  $(this).parent().append("<img src='/img/daily_pic/35.png' style='position:absolute; margin-left:-270px;cursor:pointer;' id='eyes_img'/>");
+                  $("#eyes_img").click(function() {
+                    $(this).remove();
+                    $("#2017_year").css("opacity", 1);
+                  });
                 });
               }
-
-              $("#2017_year").click(function() {
-                //$(this).remove();
-                $(this).css("opacity", 0);
-                $(this).parent().append("<img src='/img/eyes.gif' style='position:absolute; margin-left:-270px;cursor:pointer;' id='eyes_img'/>");
-                $("#eyes_img").click(function() {
-                  $(this).remove();
-                  $("#2017_year").css("opacity", 1);
-                });
-              });
           }
       }
     }
