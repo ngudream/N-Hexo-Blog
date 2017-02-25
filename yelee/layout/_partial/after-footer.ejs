@@ -203,8 +203,6 @@
                     $(this).attr("title", title);
                     if (!!$().tooltip) { $(this).tooltip() }
                 }
-				//$(this).attr("href", "#" + title.toLowerCase());
-				//$(this).attr("onclick", alert("text"));
             })
             var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
             if (isSafari) {
@@ -358,7 +356,8 @@
           // $.cachedScript('https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js').done(function () {
           //   console.log("dddddddd");
           // });
-          includeJavaScript("https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js");
+          jQuery.getScript("https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js").done(function(){
+          });
 
           <% if (theme.baidu_tongji){ %>
               $.cachedScript('//hm.baidu.com/hm.js?<%=theme.baidu_tongji%>').done(function () {
@@ -366,7 +365,11 @@
           <% } %>
 
           if(isPostPage) {
-            $.cachedScript('//push.zhanzhang.baidu.com/push.js').done(function () {
+            jQuery.getScript('//push.zhanzhang.baidu.com/push.js').done(function () {
+            });
+            //目录随着页面滚动页高亮标题
+            jQuery.getScript('/plugins/js/scrollHighlight.js').done(function(){
+              $(".toc-article").scrollHighlight({childItem:'a', container:'.article-content', attribute:'href'});
             });
           }
           addTextAnimation();
@@ -1344,7 +1347,7 @@
                 var time = Date.parse(new Date());
                 var lastTime = Date.parse("2017-02-01");
                 var day = parseInt((time -lastTime)/(1000*60*60*24));
-                var path = '/img/daily_pic/' + (day % 83) + '.png';
+                var path = '/img/daily_pic/' + (day % 115) + '.png';
                 var avatarIndex = Math.ceil(Math.random()*30);
                 var newAvatar = '/img/avatar/' + avatarIndex + '.png';
                 //console.log(path);
@@ -1382,7 +1385,7 @@
                 $("#2017_year").click(function() {
                   //$(this).remove();
                   $(this).css("opacity", 0);
-                  $(this).parent().append("<img src='/img/daily_pic/35.png' style='position:absolute; margin-left:-270px;cursor:pointer;' id='eyes_img'/>");
+                  $(this).parent().append("<img src='/img/left_bg/ghost.gif' style='position:absolute; margin-left:-250px;cursor:pointer;max-width:260px;max-height:280px' id='eyes_img'/>");
                   $("#eyes_img").click(function() {
                     $(this).remove();
                     $("#2017_year").css("opacity", 1);
@@ -1485,6 +1488,7 @@
       }
     }
 
+    //设置页面的可见，使用instantclick后需要设置
     var resetPageOpacity = function() {
       var url = window.location.pathname;
       if((url.startWith("/about/") && url.endWith("/about/")) || (url.startWith("/guestbook/") && url.endWith("/guestbook/"))){
