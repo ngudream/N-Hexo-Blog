@@ -10,7 +10,7 @@
 <% if (theme.mathjax){ %>
 <%- partial('mathjax') %>
 <% } %>
-<%- partial('scrolling-button') %>
+<!-- <%- partial('scrolling-button') %> -->
 <%- partial('open-in-new-tab', {
     global: theme.open_in_new.global
 }) %>
@@ -285,6 +285,7 @@
 
     //instantclick回调
     var afterChange = function (isChange) {
+      switchSysBar(isChange, false);
       var isPostPage = null;
       if(isPostPage == null){
         isPostPage = is_post();
@@ -328,6 +329,7 @@
           resetPageOpacity();
           hideLabels();
           resetTags();
+
           $("img.lazy").lazyload({
             placeholder : "/img/loading0_2.gif",
             effect : "fadeIn"
@@ -342,7 +344,8 @@
           resetPageWidth();
           setTitleSerialNum();
           tipBoxFunc();
-          otherSettings(isChange);
+          scroll2Top();
+          otherSettings(isChange, is_post(), is_home());
           baiduShare();
           if(isPostPage){
             setHightLigth();
@@ -363,7 +366,7 @@
               $.cachedScript('//hm.baidu.com/hm.js?<%=theme.baidu_tongji%>').done(function () {
               });
           <% } %>
-
+          
           if(isPostPage) {
             jQuery.getScript('//push.zhanzhang.baidu.com/push.js').done(function () {
             });
@@ -377,7 +380,9 @@
           textAnimationClick(avatarPath);
 
           codeRain();
-          duoshuoComments();
+          switchFoldLeft();
+          //duoshuoComments();
+          //neteaseCommnets();
       });
     }
 
@@ -577,7 +582,7 @@
 
     //设置标签的背景色
     var resetTags = function(){
-       if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
+       if(!checkMobile()){
             var tags = $(".tagcloud a");
             for(var i = 0; i < tags.length; i++){
                 var num = Math.floor(Math.random()*7);
@@ -655,7 +660,7 @@
 					randomAnimationName = animationNames[Math.ceil(Math.random() * len) - 1];
         var imgAvatar = "<img id='blog_avatar' src='" + avatarPath + "' class='animated " + randomAnimationName + "' style='background: white;'/>";
         var totalwidth = $(window).width();
-        if (navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i) || totalwidth < 700) {//移动端头像
+        if (checkMobile() || totalwidth < 700) {//移动端头像
           imgAvatar = "<img id='blog_avatar' src='" + avatarPath + "'/>";
           $("#id_avatar_a_mobile").append(imgAvatar);
           if(avatarPath == '/img/buerrong.png'){
@@ -797,7 +802,7 @@
       				t.html(listStr + t.html());
       			});
         } else {
-            //if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)) {
+            //if (!checkMobile()) {
             //	var heartspan = "<span class='htmleaf-links'><i class='heart' id='like3' rel='like'></i></span>";
             //	$("#footerdiv").append(heartspan);
             //底部红心动画
@@ -841,9 +846,27 @@
         }
     }
 
-    var otherSettings = function (isChange) {
+    var scroll2Top = function () {
+      jQuery.getScript('/plugins/js/gotop.js').done(function () {
+        $("body").append('<div id="backtoTop" data-action="gototop"><canvas id="backtoTopCanvas" width="48" height="48"></canvas><div class="per"></div></div>');
+        var T = bigfa_scroll;
+        T.backToTop($("#backtoTop"));
+        T.scrollHook($(window), "#666666");
+        try {
+          $(".flexslider").flexslider({
+            animation: "fade",
+            prevText: "",
+            nextText: "",
+            directionNav: true
+          });
+        } catch (e) {
+        }
+      });<!-- http://suninuni.com/2015/11/27/frontend/hexo/back-to-top/ -->
+    }
+
+    var otherSettings = function (isChange, isPostPage, isHome) {
         var totalwidth = $(window).width();
-        if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)) {
+        if (!checkMobile()) {
                 //running
           if (totalwidth <= 900) {
             $(".body-wrap").css("margin-bottom", "116px");
@@ -863,12 +886,12 @@
           //$("#cb-search-btn").css("opacity", 0);
 
           //点击弹出心形
-          if(isChange){
-            // var loveClick = function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)try{d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");}catch(e){}requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()};
-            // loveClick(window, document);
-            $.cachedScript('/js/love.js').done(function () {
+          //console.log(isChange, isPostPage, isHome);
+          if(isChange && !isPostPage && isHome){
+            jQuery.getScript('/js/love.js').done(function () {
             });
           }
+
         	var curUrl = window.location.pathname;
         	var tagUrl = "/tags/"
         	var guestUrl = "/guestbook/";
@@ -1157,7 +1180,7 @@
 
     //移动端添加搜索图标
     var mobileSearch = function(){
-      if(navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
+      if(checkMobile()){
         $("#id_span_search_close").append("<img src='/search/img/cb-close.png' id='cb-close-btn'/>");
         $("#id_span_search_open").append("<img src='/search/img/cb-search.png' id='cb-search-btn'/>");
       }
@@ -1347,14 +1370,21 @@
                 var time = Date.parse(new Date());
                 var lastTime = Date.parse("2017-02-01");
                 var day = parseInt((time -lastTime)/(1000*60*60*24));
-                var path = '/img/daily_pic/' + (day % 115) + '.png';
+                var path = '/img/daily_pic/' + (day % 159) + '.png';
                 var avatarIndex = Math.ceil(Math.random()*30);
                 var newAvatar = '/img/avatar/' + avatarIndex + '.png';
                 //console.log(path);
                 var year_div = "<div align=center id='left_show_div' ><img src=" + path + " id='2017_year' style='cursor:pointer;'/></div>";
                 $("#left_col_div").append(year_div);
-                if(totalHeight >= 1000){
-                  $("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
+
+                if(totalHeight >= 1000){//左侧鼠标进入显示滚动条
+                  $("#left_col_div").mouseenter(function(){
+                    $("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
+                  });
+
+                  $("#left_col_div").mouseleave(function(){
+                    $("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
+                  });
                 } else if(totalHeight >= 700){
                   $("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
                   var clickCount = 0;
@@ -1396,6 +1426,79 @@
       }
     }
 
+    //收缩左边拦按钮
+    function switchFoldLeft(){
+      var totalwidth = screen.width;
+      if(totalwidth <= 1400){//19寸以下显示按钮
+        $("#left_col_div").mouseenter(function(){
+          $("#fold_div").css("display", "");
+        });
+
+        $("#left_col_div").mouseleave(function(){
+          if($(this).width() > 20){
+            $("#fold_div").css("display", "none");
+          }
+        });
+      }
+    }
+
+    //收缩左边拦
+    //var status = 1;
+    function switchSysBar(isChange, isClicked){
+      if(isChange){
+        return;
+      }
+      console.log(window.status);
+      if(!isClicked && 1 == window.status){
+        hideLeft();
+        return;
+      } else if(!isClicked){
+        return;
+      }
+
+        if (0 == window.status){
+          window.status = 1;
+          hideLeft();
+        } else {
+    		  window.status = 0;
+          showLeft();
+        }
+        console.log(window.status);
+    }
+
+    function showLeft() {
+      $("#left_col_div").fadeToggle("fast", function(){
+        $("#left_col_div").css("background-color", "#fafafa")
+        $("#fold_div").css("background", "url(/img/right1.png) no-repeat center right");
+        $("#id_code_rain_div").toggle();
+        $("#intrude_div").toggle();
+        $("#toc").toggle();
+        $("#post-nav-button").toggle();
+        $("#left_show_div").toggle();
+        $(this).css("display", "");
+        $(".body-wrap").css("max-width", "94%");
+        $("#left_col_div").css("width", "300px");
+        $("#mid_col_div").css("left", "300px");
+      });
+    }
+
+    function hideLeft() {
+      $("#left_col_div").fadeToggle("fast", function(){
+        $("#id_code_rain_div").hide();
+        $("#intrude_div").hide();
+        $("#toc").hide();
+        $("#post-nav-button").hide();
+        $("#left_show_div").hide();
+        $(this).css("width", "20px");
+        $(this).css("display", "");
+        $("#fold_div").css("display", "");
+        $("#fold_div").css("background", "url(/img/left1.png) no-repeat center right");
+        $("#left_col_div").css("background-color", "#e6e6e6");
+        $(".body-wrap").css("max-width", "90%");
+        $("#mid_col_div").css("left", "20px");
+      });
+    }
+
     //代码雨
     var curTimer = null;//记录上一页面的timer，使用instantclick后，打开下一页面时需要取消上一个定时器
     var colorList = ["#6da336", "#ff945c", "#66CC66", "#99CC99", "#CC6666", "#76becc", "#c99979", "#918597", "#4d4d4d"];
@@ -1412,7 +1515,7 @@
       $("#container .left-col .overlay").css({"background-color": colorList[id],"opacity": .5});
       // Mobile
       $("#container #mobile-nav .overlay").css({"background-color": colorList[id],"opacity": .7});
-      if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
+      if(!checkMobile()){
         if(curTimer == null){
           // 代码雨
           if(matrix != undefined){
@@ -1472,6 +1575,17 @@
         <% } %>
     }
 
+    //网易评论
+    var neteaseCommnets = function() {
+      if(is_post()){
+        jQuery.getScript("https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js")
+            .done(function() {
+              $("#yun-tie-sdk-wrap").css("background-color","#E6E6E6 !important");
+            })
+            .fail(function() {});
+      }
+    }
+
     //隐藏categories、tags页面下的标签
     var hideLabels =  function() {
       // Hide Labels
@@ -1500,7 +1614,7 @@
 <!-- 添加 InstantClick 预加载 -->
 <!-- 这段代码的含义是每次页面重载时，通过直接的函数调用来实现MathJax、百度统计、Google Code Prettify、Google Analytics的重新运行 -->
  <script data-no-instant>
-		if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
+		if(!checkMobile()){
 			jQuery.getScript("//cdn.bootcss.com/instantclick/3.0.1/instantclick.min.js")
 				.done(function() {
 					InstantClick.on('change', function (isInitialLoad) {
@@ -1530,4 +1644,17 @@
 		} else {
       afterChange(true);
 		}
+
+    //移动客户端判断结束
+    function checkMobile() {
+        var isiPad = navigator.userAgent.match(/iPad/i) != null;
+        if (isiPad) {
+            return false;
+        }
+        var isMobile = navigator.userAgent.match(/iphone|android|phone|mobile|wap|netfront|java|opera mobi|opera mini|ucweb|windows ce|symbian|symbianos|series|webos|sony|blackberry|dopod|nokia|samsung|palmsource|xda|pieplus|meizu|midp|cldc|motorola|foma|docomo|up.browser|up.link|blazer|helio|hosin|huawei|novarra|coolpad|webos|techfaith|palmsource|alcatel|amoi|ktouch|nexian|ericsson|philips|sagem|wellcom|bunjalloo|maui|smartphone|iemobile|spice|bird|zte-|longcos|pantech|gionee|portalmmm|jig browser|hiptop|benq|haier|^lct|320x320|240x320|176x220/i) != null;
+        if (isMobile) {
+            return true;
+        }
+        return false;
+    }
 </script>

@@ -1,10 +1,14 @@
 <%- partial('_partial/head') %>
 <body>
   <div id="container">
-    <div class="left-col" id="left_col_div" style="background-color:#fafafa;">
+    <div class="left-col" id="left_col_div" style="background-color:#fafafa">
+      <div id="fold_div" onclick="switchSysBar(false, true)" style="position:fixed;float:left;height:100%;width:20px; background:#fafafa url(/img/right1.png) no-repeat center right;display:none" >
+      </div>
     <%- partial('_partial/left-col', null, {cache: !config.relative_link}) %>
+
     </div>
-    <div class="mid-col">
+
+    <div class="mid-col" id="mid_col_div">
       <%- partial('_partial/mobile-nav', null, {cache: !config.relative_link}) %>
       <div class="body-wrap"><%- body %></div>
       <%- partial('_partial/footer') %>

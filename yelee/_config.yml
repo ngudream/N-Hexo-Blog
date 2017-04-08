@@ -18,7 +18,7 @@ menu:
 avatar: /img/running.jpg
 
 # Small icon of Your site | 站点小图标地址
-favicon: /img/favicon.ico
+favicon: /img/favicon.png
 
 # Internationalization | 主题语言
 ## Change Language in SITE's _config.yml | 在站点配置中切换语言
@@ -29,7 +29,7 @@ favicon: /img/favicon.ico
 ## If your site' url is 'http://yoursite.com/blog', set root_url as '/blog/'
 ## 网站若存放在子目录，请按上面格式填写
 ## https://hexo.io/docs/configuration.html#URL
-root_url: 
+root_url:
 
 # Year of Site Creation | 网站成立年份
 since: 2016
@@ -44,7 +44,7 @@ since: 2016
 socail: true
 
 subnav:
-  Email: "mailto:xxx@gmail.com"
+  Email: ""
   #新浪微博: "sina weibo"
   GitHub: "https://github.com/ngudream"
   #V2EX: "#"
@@ -87,7 +87,7 @@ subnav:
 # Chose ONE as your comment system and keep others disable.
 # 选一个作为网站评论系统，其他保持禁用。
 
-preload_comment: false	
+preload_comment: false
 ## false: 当点击评论条等区域时再加载评论模块
 ## false: load comment's section until u click/hover on the bar/icon
 
@@ -95,15 +95,15 @@ show_count: true
 ## 是否在主页文章标题旁显示评论数（多说、Disqus）
 ## Add comment count after article title
 
-disqus: 
+disqus:
   #on: true
-  shortname: 
+  shortname:
   # https://help.disqus.com/customer/en/portal/articles/466208-what-s-a-shortname-
-  # It is unnecessary to enable disqus here if 
-  # you have set "disqus_shortname" in your site's "_config.yml" 
+  # It is unnecessary to enable disqus here if
+  # you have set "disqus_shortname" in your site's "_config.yml"
 
-duoshuo: 
-  on: true
+duoshuo:
+  on: false
   domain: 
   # 是否开启多说评论，http://duoshuo.com/create-site/
   # 使用上面网址登陆你的多说，然后创建站点，在 domain 中填入你设定的域名前半部分
@@ -112,7 +112,7 @@ duoshuo:
 
 youyan:
   #on: true
-  id: 
+  id:
   # 是否开启友言评论，http://www.uyan.cc/index.php
   # id 中填写你的友言用户数字ID，注册后进入后台管理即可查看
   # 友言服务在 Web 环境下运行，普通本地环境无法查看，请部署后在线上测试。
@@ -129,7 +129,7 @@ background_image: 0
 # Base Font Size | 字号调节
 base_font_size: 16  #px, 16 - 24
 
-## General Color Scheme | 主题配色方案 
+## General Color Scheme | 主题配色方案
 ## 可用值 Value: yilia
 color_scheme: yilia
 
@@ -137,16 +137,16 @@ color_scheme: yilia
 highlight_style:
   on: false
   inline_code: 1  # Value: 0 - 9 可选
-  code_block: 1  # Value: 0 - 4 
+  code_block: 1  # Value: 0 - 4
   # Set inline_code to style highlight text
   # Chose a highlight theme for code block
   # 通过 inline_code 切换内置文本高亮样式
   # 通过 code_block 切换内置代码高亮配色主题
-  
+
 ## prettify高亮配置，替换默认的
 highlight:
    enable: true
-   
+
 blockquote_style:
   #on: true
   blockquote: 1  # Value: 0 - 7 可选
@@ -157,7 +157,7 @@ blockquote_style:
 heading_style: 0 # Value: 0 - 2
 
 ## List style type (ul) | 无序列表项标记样式
-list_style: 0  # value: 0 - 12 可选
+list_style: 1  # value: 0 - 12 可选
 
 # 左边栏宽度 px
 left_col_width: 300
@@ -169,7 +169,7 @@ copyright: true
 toc:
   on: true
   list_number: true # 目录序号
-  max_depth: 3  # 1 - 6 (h1-h6) 目录最大级数
+  max_depth: 5  # 1 - 6 (h1-h6) 目录最大级数
   nowrap: false # Keep title on same line | 目录标题不换行
 
 # 是否开启主页及加载头像时的动画效果
@@ -180,8 +180,8 @@ animate: true
 # 工具提示框样式美化
 jquery_ui: false
 
-# Max width of right cloumn | 限制右侧内容的宽带 
-limit_article_width: 
+# Max width of right cloumn | 限制右侧内容的宽带
+limit_article_width:
   on: false
   max_width: 70 # em
 
@@ -196,14 +196,15 @@ friends:
   Hexo: https://hexo.io
   GitHub: https://pages.github.com/
   MOxFIVE: http://moxfive.xyz/
+  Keegan小钢: http://keeganlee.me/
 #friends: false
 
 #是否开启“关于我”。
-aboutme: 专注于移动开发的攻城狮。我不在乎输赢，我只是为了认真。
+aboutme:
 #aboutme: false
 
 #最近访客
-visitor: true
+visitor: false
 
 # Open link in a new tab | 是否在新窗口打开链接
 ## `global` 0: Set separately, 1: Open all in new 2: Open all in current
@@ -234,25 +235,25 @@ ie_updater:
   ## http://outdatedbrowser.com/
 
 # Tab Title Change | 标签页标题切换
-tab_title_change: 
+tab_title_change:
   on: false
-  left_tab_title: ''
-  return_tab_title: ''
+  left_tab_title: 'ㄟ(◑‿◐ )ㄏngudream'
+  return_tab_title: '(*´∇｀*) 被你发现啦~ '
 
 # 目录中标题不换行
-# Keep TOC title on the same line | 
+# Keep TOC title on the same line |
 toc_nowrap: true
 
 # 自定义"阅读全文"链接按钮的显示文字
 # Customize the text on excerpt link
-excerpt_link: 发现更多 
+excerpt_link: 发现更多
 
 # >>> Vendors | 第三方工具 & 服务 <<<
 
 # Local Site Search | 本地站内搜索
 ## Insatall below plugin to take effect | 使用搜索需先安装对应插件
 ## https://github.com/PaicHyperionDev/hexo-generator-search
-search: 
+search:
   on: true
   onload: true
   path: search.xml
@@ -270,7 +271,7 @@ fancybox: false
 mathjax: false
 
 # Socail Share | 是否开启分享
-share: 
+share:
   on: true
   baidu: true
   addthis: false
@@ -280,10 +281,12 @@ share:
 
 # 百度、谷歌站长验证。填写 HTML 标签 content
 # Site Verification for Google and Baidu. HTML label content.
-baidu_site: 
-google_site: 
+baidu_site:
+google_site:
 
 # Fill in Google Analytics tracking ID, #e.g. UA-XXXXX-X
+google:
+  on: true
 google_analytics: 
 
 # 百度统计 http://sitecenter.baidu.com/sc-web/
@@ -299,7 +302,7 @@ visit_counter:
 
 # GitHub Repo Widget
 # https://github.com/hustcc/GitHub-Repo-Widget.js
-github_widget: true
+github_widget: false
 
 # Progress Bar | 页面加载进度条
 # Demo: http://github.hubspot.com/pace/docs/welcome/
@@ -321,8 +324,8 @@ semantic_ui_js: asset/vendor/semantic-ui/build/packaged/javascript/semantic.min.
 
 CDN:
   jquery: //cdn.bootcss.com/jquery/2.2.4/jquery.min.js
-  require: //cdn.bootcss.com/require.js/2.2.0/require.min.js
-  fontawesome: //cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css
+  require: //cdn.bootcss.com/require.js/2.3.2/require.min.js
+  fontawesome: //cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.min.css
   fancybox_js: //cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js
   fancybox_css: //cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css
   animate_css: //cdn.bootcss.com/animate.css/3.5.1/animate.min.css

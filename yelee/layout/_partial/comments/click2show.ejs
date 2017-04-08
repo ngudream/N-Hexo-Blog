@@ -7,8 +7,14 @@
         </a>
     </aside>
     <script>
+        var isExist = false;
         var $commentBar = $("#comments aside.comment-bar");
         var load$hide = function(){
+            if(!isExist){
+              isExist = true;
+              includeLinkStyle("/plugins/css/duoshuo.css");//加载多说样式，要不使用instantclick后有跨域问题，无法加载多说上的样式
+            }
+
             $commentBar.find("a > i").toggle();
             loadJS("http://ngudream.com/js/embed.js", function(){
               if (typeof DUOSHUO !== 'undefined'){
@@ -16,7 +22,6 @@
               }
             })
             $commentBar.fadeOut(800);
-
         }
         $commentBar.click(function(){
             load$hide();
